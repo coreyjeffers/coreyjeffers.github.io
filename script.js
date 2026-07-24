@@ -380,13 +380,14 @@ function renderLiveBroadcast(){
 }
 function renderProducts(filter='all'){
   const visible = products.filter(product => filter==='all' || product.category===filter);
-  $('#productGrid').innerHTML = visible.map(product => `<article class="product-card${product.comingSoon?' is-coming-soon':''}"><div class="product-image">${product.badge?`<span class="product-badge">${product.badge}</span>`:''}${product.image?`<img src="/${product.image}" alt="${escapeHtml(product.name)} artwork" loading="lazy" decoding="async">`:`<div class="product-art">${product.art}<small>${product.sub}</small></div>`}</div><div class="product-info"><h3>${product.name}</h3>${product.description?`<p>${escapeHtml(product.description)}</p>`:''}${product.sizes?`<label class="product-size">Size<select data-size-for="${product.id}" aria-label="Choose size for ${escapeHtml(product.name)}">${product.sizes.map(size=>`<option value="${size}">${size}${product.sizeAdjustments?.[size]?` (+${money(product.sizeAdjustments[size])})`:''}</option>`).join('')}</select></label>`:''}<div class="product-meta"><strong>${money(product.price)}</strong>${product.comingSoon?'<span class="coming-soon-label">Launching soon</span>':`<button class="quick-add" type="button" data-id="${product.id}" aria-label="Buy ${product.name} securely">Buy now</button>`}</div></div></article>`).join('');
+  $('#productGrid').innerHTML = visible.map(product => `<article class="product-card${product.comingSoon?' is-coming-soon':''}"><div class="product-image">${product.badge?`<span class="product-badge">${product.badge}</span>`:''}${product.image?`<img src="/${product.image}" alt="${escapeHtml(product.name)} artwork" loading="lazy" decoding="async">`:`<div class="product-art">${product.art}<small>${product.sub}</small></div>`}</div><div class="product-info"><h3>${product.name}</h3>${product.description?`<p>${escapeHtml(product.description)}</p>`:''}${product.sizes?`<label class="product-size">Size <span>Required</span><select data-size-for="${product.id}" aria-label="Choose a required size for ${escapeHtml(product.name)}" required><option value="" selected disabled>Select size</option>${product.sizes.map(size=>`<option value="${size}">${size}${product.sizeAdjustments?.[size]?` (+${money(product.sizeAdjustments[size])})`:''}</option>`).join('')}</select></label>`:''}<div class="product-meta"><strong data-price-for="${product.id}">${money(product.price)}</strong>${product.comingSoon?'<span class="coming-soon-label">Launching soon</span>':`<button class="quick-add" type="button" data-id="${product.id}" aria-label="Buy ${product.name} securely">Buy now</button>`}</div></div></article>`).join('');
 }
 
 function checkoutUrl(product,size=''){
   const base=product.checkout?.[size]||product.checkout?.base;
   if(!base)return '';
-  return `${base}?client_reference_id=${encodeURIComponent(`${product.id}-${size||'one-size'}`.toLowerCase())}`;
+  const orderReference=`${product.id}-size-${size||'one-size'}`.toLowerCase();
+  return `${base}?client_reference_id=${encodeURIComponent(orderReference)}`;
 }
 const productUnitPrice=(product,size='')=>product.price+(product.sizeAdjustments?.[size]||0);
 const cartItemKey=item=>`${item.id}::${item.size||''}`;
@@ -422,10 +423,26 @@ document.addEventListener('click',event=>{
   const target=event.target;
   const claimButton=target.closest('[data-claim-member]');
   if(claimButton){requestedProfileMember=claimButton.dataset.claimMember;openProfileModal()}
-  if(target.matches('.quick-add')){const product=products.find(entry=>entry.id===target.dataset.id);const size=$(`[data-size-for="${target.dataset.id}"]`)?.value||'';const url=checkoutUrl(product,size);if(url)window.location.href=url;else toast('Checkout is not available for this item yet')}
+  if(target.matches('.quick-add')){
+    const product=products.find(entry=>entry.id===target.dataset.id);
+    const sizeSelect=$(`[data-size-for="${target.dataset.id}"]`);
+    const size=sizeSelect?.value||'';
+    if(product.sizes && !size){sizeSelect.classList.add('size-required');sizeSelect.focus();toast('Please select a shirt size');return}
+    const url=checkoutUrl(product,size);
+    if(url)window.location.href=url;else toast('Checkout is not available for this item yet');
+  }
   if(target.matches('[data-remove]'))removeFromCart(target.dataset.remove);
   if(target.matches('.filter')){document.querySelectorAll('.filter').forEach(button=>{button.classList.remove('active');button.setAttribute('aria-pressed','false')});target.classList.add('active');target.setAttribute('aria-pressed','true');renderProducts(target.dataset.filter)}
   if(target.closest('.main-nav a'))setMenu(false);
+});
+document.addEventListener('change',event=>{
+  const select=event.target.closest('[data-size-for]');
+  if(!select)return;
+  const product=products.find(entry=>entry.id===select.dataset.sizeFor);
+  select.classList.remove('size-required');
+  $(`[data-price-for="${product.id}"]`).textContent=money(productUnitPrice(product,select.value));
+  const button=$(`.quick-add[data-id="${product.id}"]`);
+  button.setAttribute('aria-label',`Buy ${product.name}, size ${select.value}, securely`);
 });
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape'){setMenu(false);closeCart();closeProfileModal()}
