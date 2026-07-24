@@ -373,35 +373,6 @@ async function openProfileModal(){
 }
 function closeProfileModal(){if(!$('#profileModal').classList.contains('open'))return;$('#profileModal').classList.remove('open');$('#profileModal').setAttribute('aria-hidden','true');$('#profileBackdrop').classList.remove('open');document.body.classList.remove('drawer-open');setTimeout(()=>{$('#profileBackdrop').hidden=true},250);if(lastFocused)lastFocused.focus()}
 async function saveProfile(event){event.preventDefault();const form=new FormData(event.currentTarget);const payload=Object.fromEntries(form.entries());const button=$('#saveProfile');button.disabled=true;button.textContent='Saving…';try{const data=await fetchJson('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});currentAccount.profile=data.profile;await loadPublicProfiles();fillProfileForm(data.profile);$('#profileTitle').textContent='Edit your member profile';toast('Profile saved')}catch(error){toast(error.message)}finally{button.disabled=false;button.textContent='Save profile'}}
-function renderVotes(){
-  const total = votes.reduce((sum,item) => sum+item.votes,0);
-  const max = Math.max(...votes.map(item => item.votes));
-  $('#voteTotal').textContent = `${total} votes`;
-  $('#voteUpdated').textContent = `Updated ${votesLastUpdated}`;
-  $('#voteList').innerHTML = votes.map((item,index) => `<div class="vote-option"><div><button class="vote-name" type="button" data-voters-for="${escapeHtml(item.name)}" aria-label="Show voters for ${escapeHtml(item.name)}">${index+1}. ${escapeHtml(item.name)}</button><p>Click the name to see counted voters</p></div><strong class="vote-count">${item.votes}</strong><div class="vote-bar" role="progressbar" aria-label="${item.name}: ${item.votes} votes" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${item.votes}"><i style="width:${item.votes/max*100}%"></i></div></div>`).join('');
-}
-function cleanVoterName(name){
-  const tagged=['Pam Smith','Clayton Adkins','Dan Phelps'];
-  let display=name.replace(/@highlight comment.*$/i,'').replace(/@$/,'').trim();
-  tagged.forEach(tag=>{const index=display.indexOf(tag);if(index>0)display=display.slice(0,index).trim()});
-  return display;
-}
-function openVoterModal(angler){
-  const names=(voteVoters[angler]||[]).map(cleanVoterName).filter(Boolean);
-  lastFocused=document.activeElement;
-  $('#voterModalTitle').textContent=angler;
-  $('#voterModalCount').textContent=`${names.length} counted ${names.length===1?'voter':'voters'}`;
-  $('#voterNames').innerHTML=names.map((name,index)=>`<li><span>${index+1}</span>${escapeHtml(name)}</li>`).join('');
-  $('#voterModal').classList.add('open');$('#voterModal').setAttribute('aria-hidden','false');
-  $('#voterBackdrop').hidden=false;requestAnimationFrame(()=>$('#voterBackdrop').classList.add('open'));
-  document.body.classList.add('drawer-open');$('#closeVoters').focus();
-}
-function closeVoterModal(){
-  if(!$('#voterModal').classList.contains('open'))return;
-  $('#voterModal').classList.remove('open');$('#voterModal').setAttribute('aria-hidden','true');
-  $('#voterBackdrop').classList.remove('open');document.body.classList.remove('drawer-open');
-  setTimeout(()=>{$('#voterBackdrop').hidden=true},250);if(lastFocused)lastFocused.focus();
-}
 function renderLiveBroadcast(){
   const frame=$('#liveBroadcastFrame'),placeholder=$('#livePlaceholder'),link=$('#liveBroadcastLink'),note=$('#liveBroadcastNote');
   if(liveBroadcast.embedUrl){frame.src=liveBroadcast.embedUrl;frame.hidden=false;placeholder.hidden=true;note.textContent='The official broadcast is ready';}
@@ -451,15 +422,13 @@ document.addEventListener('click',event=>{
   const target=event.target;
   const claimButton=target.closest('[data-claim-member]');
   if(claimButton){requestedProfileMember=claimButton.dataset.claimMember;openProfileModal()}
-  const voterButton=target.closest('[data-voters-for]');
-  if(voterButton)openVoterModal(voterButton.dataset.votersFor);
   if(target.matches('.quick-add')){const product=products.find(entry=>entry.id===target.dataset.id);const size=$(`[data-size-for="${target.dataset.id}"]`)?.value||'';const url=checkoutUrl(product,size);if(url)window.location.href=url;else toast('Checkout is not available for this item yet')}
   if(target.matches('[data-remove]'))removeFromCart(target.dataset.remove);
   if(target.matches('.filter')){document.querySelectorAll('.filter').forEach(button=>{button.classList.remove('active');button.setAttribute('aria-pressed','false')});target.classList.add('active');target.setAttribute('aria-pressed','true');renderProducts(target.dataset.filter)}
   if(target.closest('.main-nav a'))setMenu(false);
 });
 document.addEventListener('keydown',event=>{
-  if(event.key==='Escape'){setMenu(false);closeCart();closeProfileModal();closeVoterModal()}
+  if(event.key==='Escape'){setMenu(false);closeCart();closeProfileModal()}
   if(event.key==='Tab' && $('#cartDrawer').classList.contains('open')){const focusable=[...$('#cartDrawer').querySelectorAll('button,a,[tabindex]:not([tabindex="-1"])')].filter(element=>!element.disabled);if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}
 });
 $('#showAllAnglers').addEventListener('click',()=>{rosterExpanded=!rosterExpanded;renderAnglers()});
@@ -467,12 +436,10 @@ $('#profileButton').addEventListener('click',openProfileModal);
 $('#closeProfile').addEventListener('click',closeProfileModal);
 $('#profileBackdrop').addEventListener('click',closeProfileModal);
 $('#profileForm').addEventListener('submit',saveProfile);
-$('#closeVoters').addEventListener('click',closeVoterModal);
-$('#voterBackdrop').addEventListener('click',closeVoterModal);
 $('#menuToggle').addEventListener('click',()=>setMenu(!$('#mainNav').classList.contains('open')));
 $('#cartButton').addEventListener('click',openCart);
 $('#closeCart').addEventListener('click',closeCart);
 $('#drawerBackdrop').addEventListener('click',closeCart);
 $('#checkoutButton').addEventListener('click',requestOrder);
 
-renderStandings();renderEvents();renderAnglers();renderNews();renderAnglerProfilePage();renderNewsArticlePage();renderVotes();renderLiveBroadcast();renderProducts();renderCart();updateCountdown();loadPublicProfiles();if(location.hash==='#claim-profile')openProfileModal();setInterval(updateCountdown,60000);
+renderStandings();renderEvents();renderAnglers();renderNews();renderAnglerProfilePage();renderNewsArticlePage();renderLiveBroadcast();renderProducts();renderCart();updateCountdown();loadPublicProfiles();if(location.hash==='#claim-profile')openProfileModal();setInterval(updateCountdown,60000);
