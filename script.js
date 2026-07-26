@@ -1,8 +1,18 @@
 const standings = [
-  {name:'Corey Jeffers',points:493,detail:'Official series rank #2',move:'—'},
-  {name:'Matt Stewart',points:490,detail:'Official series rank #3',move:'—'},
-  {name:'Brandon Hunter',points:483,detail:'Official series rank #4',move:'—'},
-  {name:'Blayne Peterman',points:475,detail:'Official series rank #5',move:'—'}
+  {rank:2,name:'Corey Jeffers',points:493},
+  {rank:3,name:'Matt Stewart',points:490},
+  {rank:4,name:'Brandon Hunter',points:483},
+  {rank:5,name:'Blayne Peterman',points:475},
+  {rank:6,name:'Skip Martin',points:474},
+  {rank:7,name:'Auzzie Dangerous',points:469},
+  {rank:7,name:'Krazy Kat Ladies',displayName:'Krazy Kat Ladies Smith',points:469},
+  {rank:9,name:'Jeff Tate',points:459},
+  {rank:10,name:'Troy Geer',points:450},
+  {rank:11,name:'Clint Bafford',points:448},
+  {rank:12,name:'Chris Poor',points:445},
+  {rank:13,name:'Robert Shively',points:438},
+  {rank:14,name:'Jon Myers',points:430},
+  {rank:15,name:'Cameron Marriott',points:415}
 ];
 const FISHING_CHAOS_CLUB_URL = 'https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj';
 const FISHING_CHAOS_SERIES_TOURNAMENTS_URL = `${FISHING_CHAOS_CLUB_URL}/tournament-series/a7NS6zRU4LrTmuYPWIDH/tournaments`;
@@ -306,7 +316,12 @@ const $ = selector => document.querySelector(selector);
 const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
 
 function renderStandings(){
-  $('#standingsTable').innerHTML = standings.map((item,index) => `<div class="standing-row"><span class="pos">${String(index+2).padStart(2,'0')}</span><div class="standing-person"><img class="standing-thumb" src="/${rosterPhoto(item.name)}" alt="${item.name}" loading="lazy"><div><h3>${item.name}</h3><p>${item.detail}</p></div></div><span class="movement ${item.move.includes('▼')?'down':''}" aria-label="${item.move==='—'?'No rank change':item.move.includes('▼')?'Down one place':`Up ${item.move.replace('▲ ','')} place`}">${item.move}</span><strong class="points">${item.points} <small>PTS</small></strong></div>`).join('');
+  const championshipField = standings.filter(item => item.rank <= 15);
+  $('#standingsTable').innerHTML = championshipField.map(item => {
+    const publicName = item.displayName || memberDisplayName(item.name);
+    const cutLine = item.rank === 15 ? '<span class="cut-line">Championship cut line</span>' : '';
+    return `<div class="standing-row ${item.rank===15?'cut-line-row':''}"><span class="pos">${String(item.rank).padStart(2,'0')}</span><div class="standing-person"><img class="standing-thumb" src="/${rosterPhoto(item.name)}" alt="${escapeHtml(publicName)}" loading="lazy"><div><h3>${escapeHtml(publicName)}</h3><p>Official series rank #${item.rank}</p>${cutLine}</div></div><strong class="points">${item.points} <small>PTS</small></strong></div>`;
+  }).join('');
 }
 function renderEvents(){
   $('#eventGrid').innerHTML = events.map(event => `<a class="event-card ${event.next?'next':''}" href="${event.url}" target="_blank" rel="noopener" aria-label="${event.seriesFallback?'Open the official series tournament list for':`Open ${event.name} on`} Fishing Chaos"><div class="date-box"><span>${event.month}</span><strong>${event.day}</strong></div><div class="event-copy"><h3>${event.name}</h3><p>${event.detail}</p><span class="event-link">${event.seriesFallback?'Open series tournaments':'View tournament'} ↗</span></div><span class="status ${event.done?'complete':event.status==='Upcoming'?'upcoming':'open'}">${event.status}</span></a>`).join('');
