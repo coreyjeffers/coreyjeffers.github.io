@@ -238,7 +238,7 @@ const memberInitials = name => {
   return `${parts[0]?.[0] || 'K'}${parts.length > 1 ? parts[parts.length-1][0] : ''}`.toUpperCase();
 };
 const memberSlug = name => name.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const rosterPhoto = name => memberPhotos[name] ? `${memberPhotos[name]}?v=2` : '';
+const rosterPhoto = name => memberPhotos[name] ? `${memberPhotos[name]}?v=3` : '';
 const anglers = memberNames.map(name => ({name,rank:'Official member',initials:memberInitials(name),photo:rosterPhoto(name),stats:'Katyakers of Ohio · Fishing Chaos roster'}));
 const featuredAnglers = featuredAnglersBase.map(angler => ({...angler,photo:rosterPhoto(angler.name)}));
 const votes = [
