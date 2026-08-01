@@ -16,7 +16,10 @@ const standings = [
 ];
 const FISHING_CHAOS_CLUB_URL = 'https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj';
 const FISHING_CHAOS_SERIES_TOURNAMENTS_URL = `${FISHING_CHAOS_CLUB_URL}/tournament-series/a7NS6zRU4LrTmuYPWIDH/tournaments`;
-const liveBroadcast = {embedUrl:'',watchUrl:''};
+const liveBroadcast = {
+  embedUrl:'https://www.youtube.com/embed/sfiD_k-eUpo?autoplay=1&mute=1&playsinline=1&rel=0',
+  watchUrl:'https://www.youtube.com/watch?v=sfiD_k-eUpo'
+};
 const events = [
   {month:'APR',day:'11',name:'Rocky Fork',detail:'29 anglers · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/sjOzaQrBhQHvTn0O8ETj'},
   {month:'APR',day:'25',name:'Hoover Reservoir',detail:'23 anglers · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/3kcgxAsCv7mJV6uxMcJu'},
