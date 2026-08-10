@@ -191,19 +191,30 @@ const featuredAnglersBase = [
   {name:'Brandon Hunter',rank:'#4 AOY',initials:'BH',stats:'483 pts · Official series standings'}
 ];
 const memberNames = [
-  'Aaron Bergman','Charles Woods','David McCoy','Michael Gallaugher','Scott Hickman','Scott Wills','Justin Scheuerman','Robert Biehler','Kyle Harman',
+  'Samuel Bhuyan','Galen Bizzell','James Sherrock','Dillon DeLong','Matt Unger','Keith Konicek',
+  'Robert Long','Garrett Daniels','Aaron Grubb','Charlie Moody','Ryan Saxton','Chris Minnehan',
+  'Tyler Goodin','Juan Rosado','Kevin Goode','Marcus Bell','John Hagans','Dakota Neitzel',
+  'Drake Bryant','Daniel Swain','James Waugh','Victor Otero','Dave Workman','Aaron Goodman',
+  'David Cunningham','James Krumm','Paul Payne','Rasin Cain','Luke Beavers','Jesse Ewing',
+  'Ricardo Carrucini','Benjamin Allen','Lucky McClurg','David Workman','Rasheen Ware','Justin Sawyer',
+  'Alessio Ambriola','Robert Yost Jr','Mike Smallwood','Shane Holschuh','James Crabtree','Zach Nestor',
+  'konner manley','Christopher Johnson','Shahmarr Miller','Nathaniel Reiling','Tyler Neptune','Kimberly Gleason',
+  'Charles Hill','Jeremy Spears','Patrick Dericks','Nick Thornsberry','Shawn Mcgee','Corbin Contreras',
+  'Josh Snyder','Joe Higgins','Dalton Hurst','Aaron Bergman','Charles Woods','David McCoy',
+  'Michael Gallaugher','Scott Hickman','Scott Wills','Justin Scheuerman','Robert Biehler','Kyle Harman',
   'Matthew Collene','Austyn Ray','David Rose','Kristian Moore','John Ratliff','Robert Ratliff',
   'Steven Mills, Jr','Jermaine Jones','Jason Berenato','Jeramy Paramore','Cage Keysor','Mark Rupe',
   'Skip Martin','Justin Roberts','Bryan Mellon','Brandon Penwell','Kenneth Clifford','Bryan Ellis',
   'Barbara Bolser','Harley White','Anthony Smith','John Drummond','Paula Hood','Harry Hefner',
   'Justin Johnston','Justin Cantrell','Clint Bafford','Nicholas Wilson','Zachary Shipley','Andrew Chanthathirath',
   'Codey Layport','Paul Burnside','Cameron Marriott','Aubrey Boykin','Jack Richardson','Kayak Mike',
-  'Gage Smith','Peter Domin','Clayton Adkins','Nick Cruz','Amanda Johnson','Jeff Tate','Brier Thompson',
-  'River Kline','Curtis Cunningham','Krazy Kat Ladies','Robert Shively','Troy Geer','Brandon Hunter',
-  'Blayne Peterman','Dan Phelps','Auzzie Dangerous','James Capehart','William Sobers','Kevin Miller',
-  'Jacob Leake','Chris Poor','Corey Jeffers','Jon Myers','Matt Stewart','Tom Nunley','Kat Yakers'
+  'Gage Smith','Peter Domin','Clayton Adkins','Nick Cruz','Amanda Johnson','Jeff Tate',
+  'Brier Thompson','River Kline','Curtis Cunningham','Krazy Kat Ladies','Robert Shively','Troy Geer',
+  'Brandon Hunter','Blayne Peterman','Dan Phelps','Auzzie Dangerous','James Capehart','William Sobers',
+  'Kevin Miller','Jacob Leake','Chris Poor','Corey Jeffers','Jon Myers','Matt Stewart',
+  'Tom Nunley','Kat Yakers'
 ];
-const memberDisplayNames = {'Auzzie Dangerous':'Austin Harding'};
+const memberDisplayNames = {'Auzzie Dangerous':'Austin Harding','Krazy Kat Ladies':'Krazy Kat Ladies Smith'};
 const memberDisplayName = name => memberDisplayNames[name] || name;
 const memberPhotos = {
   'Scott Hickman':'assets/members/22d81cb9b5f44e76.jpg','Scott Wills':'assets/members/6a16a3d5e9606183.jpg',
