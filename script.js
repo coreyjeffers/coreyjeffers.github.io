@@ -179,7 +179,276 @@ const newsArticles = [
     paragraphs:[
       'Caesar Creek asked the field to make every fish count. Twenty-three anglers produced 79 accepted submissions, the lowest event total among the first six completed stops.',
       'Matt Stewart answered with a 174.50-inch score and an 8.50-inch victory over Blayne Peterman. Skip Martin’s 157.75-inch total earned the final podium position.',
-      'Austin Harding delivered the …8241 tokens truncated… sidebarHtml=sidebarItems.map(([name,score],index)=>`<li><span>${index+1}</span><div><strong>${escapeHtml(name)}</strong><small>${escapeHtml(score)}</small></div></li>`).join('');
+      'Austin Harding delivered the day’s standout single fish, earning Big Fish with a 37.50-inch blue catfish.'
+    ],
+    chaosUrl:'https://app.fishingchaos.com/tournament/O7hRGI225ITNazEe2eml'
+  },
+  {
+    slug:'hoover-reservoir-2026',event:'Hoover Reservoir',date:'April 25, 2026',time:'7:00 AM–4:00 PM ET',anglers:23,fish:107,
+    title:'Peterman wins big at Hoover Reservoir',
+    dek:'Blayne Peterman’s 187.50 inches set the highest winning score of the season’s first six completed events.',
+    podium:[['Blayne Peterman','187.50″'],['Jacob Leake','182.50″'],['Corey Jeffers','179.00″']],
+    bigFish:['Matt Stewart','46.00″ blue catfish'],
+    paragraphs:[
+      'Hoover Reservoir produced both a huge winning total and the largest submitted fish of the season through Deer Creek. Twenty-three anglers combined for 107 accepted fish.',
+      'Blayne Peterman won with 187.50 inches, five inches ahead of Jacob Leake. Corey Jeffers stayed close at 179.00 inches to complete a podium separated by only 8.50 inches from first to third.',
+      'Matt Stewart supplied the day’s headline catch: a 46.00-inch blue catfish that remains the biggest submitted fish in the first six completed Katyakers events.'
+    ],
+    chaosUrl:'https://app.fishingchaos.com/tournament/3kcgxAsCv7mJV6uxMcJu'
+  },
+  {
+    slug:'rocky-fork-2026',event:'Rocky Fork',date:'April 11, 2026',time:'7:00 AM–4:00 PM ET',anglers:29,fish:124,
+    title:'Jeffers opens the season with a Rocky Fork win',
+    dek:'Corey Jeffers held off Dan Phelps and Chris Poor in the 2026 trail opener.',
+    podium:[['Corey Jeffers','154.25″'],['Dan Phelps','151.00″'],['Chris Poor','149.75″']],
+    bigFish:['Dan Phelps','33.50″ channel catfish'],
+    paragraphs:[
+      'The 2026 Katyakers season began at Rocky Fork with 29 anglers and 124 accepted fish. From the opening stop, the podium race stayed compact.',
+      'Corey Jeffers secured the season’s first victory with 154.25 inches. Dan Phelps finished only 3.25 inches back at 151.00, and Chris Poor took third with 149.75 inches.',
+      'Phelps paired his runner-up finish with Big Fish honors after submitting a 33.50-inch channel catfish.'
+    ],
+    chaosUrl:'https://app.fishingchaos.com/tournament/sjOzaQrBhQHvTn0O8ETj'
+  }
+];
+const featuredAnglersBase = [
+  {name:'Jacob Leake',rank:'#1 AOY',initials:'JL',stats:'494 pts · Official series leader'},
+  {name:'Corey Jeffers',rank:'#2 AOY',initials:'CJ',stats:'493 pts · One point off the lead'},
+  {name:'Matt Stewart',rank:'#3 AOY',initials:'MS',stats:'490 pts · Official series standings'},
+  {name:'Skip Martin',rank:'#4 AOY',initials:'SM',stats:'486 pts · Official series standings'}
+];
+const memberNames = [
+  'Chase Kelly','Teddy Ivey','Nick Bays','Wesley Brofford','JOHN COTTERMAN','Jeff Mccafferty',
+  'Matt Groeschel','Dillon Amos','logan Robinson','Vernon Staley',
+  'Samuel Bhuyan','Galen Bizzell','James Sherrock','Dillon DeLong','Matt Unger','Keith Konicek',
+  'Robert Long','Garrett Daniels','Aaron Grubb','Charlie Moody','Ryan Saxton','Chris Minnehan',
+  'Tyler Goodin','Juan Rosado','Kevin Goode','Marcus Bell','John Hagans','Dakota Neitzel',
+  'Drake Bryant','Daniel Swain','James Waugh','Victor Otero','Dave Workman','Aaron Goodman',
+  'David Cunningham','James Krumm','Paul Payne','Rasin Cain','Luke Beavers','Jesse Ewing',
+  'Ricardo Carrucini','Benjamin Allen','Lucky McClurg','David Workman','Rasheen Ware','Justin Sawyer',
+  'Alessio Ambriola','Robert Yost Jr','Mike Smallwood','Shane Holschuh','James Crabtree','Zach Nestor',
+  'konner manley','Christopher Johnson','Shahmarr Miller','Nathaniel Reiling','Tyler Neptune','Kimberly Gleason',
+  'Charles Hill','Jeremy Spears','Patrick Dericks','Nick Thornsberry','Shawn Mcgee','Corbin Contreras',
+  'Josh Snyder','Joe Higgins','Dalton Hurst','Aaron Bergman','Charles Woods','David McCoy',
+  'Michael Gallaugher','Scott Hickman','Scott Wills','Justin Scheuerman','Robert Biehler','Kyle Harman',
+  'Matthew Collene','Austyn Ray','David Rose','Kristian Moore','John Ratliff','Robert Ratliff',
+  'Steven Mills, Jr','Jermaine Jones','Jason Berenato','Jeramy Paramore','Cage Keysor','Mark Rupe',
+  'Skip Martin','Justin Roberts','Bryan Mellon','Brandon Penwell','Kenneth Clifford','Bryan Ellis',
+  'Barbara Bolser','Harley White','Anthony Smith','John Drummond','Paula Hood','Harry Hefner',
+  'Justin Johnston','Justin Cantrell','Clint Bafford','Nicholas Wilson','Zachary Shipley','Andrew Chanthathirath',
+  'Codey Layport','Paul Burnside','Cameron Marriott','Aubrey Boykin','Jack Richardson','Kayak Mike',
+  'Gage Smith','Peter Domin','Clayton Adkins','Nick Cruz','Amanda Johnson','Jeff Tate',
+  'Brier Thompson','River Kline','Curtis Cunningham','Krazy Kat Ladies','Robert Shively','Troy Geer',
+  'Brandon Hunter','Blayne Peterman','Dan Phelps','Auzzie Dangerous','James Capehart','William Sobers',
+  'Kevin Miller','Jacob Leake','Chris Poor','Corey Jeffers','Jon Myers','Matt Stewart',
+  'Tom Nunley','Kat Yakers'
+];
+const memberDisplayNames = {'Auzzie Dangerous':'Austin Harding','Krazy Kat Ladies':'Krazy Kat Ladies Smith'};
+const memberDisplayName = name => memberDisplayNames[name] || name;
+const memberPhotos = {
+  'Scott Hickman':'assets/members/22d81cb9b5f44e76.jpg','Scott Wills':'assets/members/6a16a3d5e9606183.jpg',
+  'Justin Scheuerman':'assets/members/440977bd2ea0f35f.jpg','Austyn Ray':'assets/members/c9c94c8de56d234d.jpg',
+  'Kristian Moore':'assets/members/2e9d947141090c49.jpg','Kyle Harman':'assets/members/a26c5f319e8df7e7.jpg',
+  'Robert Biehler':'assets/members/f8172a76b72feb64.jpg','Cage Keysor':'assets/members/2d0ab81823e80cdd.jpg',
+  'Skip Martin':'assets/members/2c980b799d61405b.jpg','John Ratliff':'assets/members/ea8b1e922171f4af.jpg',
+  'Steven Mills, Jr':'assets/members/037bbe9c729071f8.jpg','Robert Ratliff':'assets/members/d3270150665dc2b5.jpg',
+  'Jason Berenato':'assets/members/1f2d0cf7a7f4df1b.jpg','Brandon Penwell':'assets/members/c93b732d402f5a8b.jpg',
+  'Bryan Mellon':'assets/members/1354cae5a8914ec5.jpg','John Drummond':'assets/members/9a9c490aeea74afc.jpg',
+  'Paula Hood':'assets/members/af7f4154cae7c520.jpg','Andrew Chanthathirath':'assets/members/f5f8675f0d5386dc.jpg',
+  'Justin Johnston':'assets/members/8477dbbe6b5a994d.jpg','Clint Bafford':'assets/members/f8f42e4932c98f39.jpg',
+  'Nicholas Wilson':'assets/members/34c3d5e281c0d4cd.jpg','Gage Smith':'assets/members/a73a740b35bc7c3e.jpg',
+  'Kayak Mike':'assets/members/987a2a9980652e47.jpg','Aubrey Boykin':'assets/members/db66f62450dd1fdd.jpg',
+  'Cameron Marriott':'assets/members/d317123431281637.jpg','Clayton Adkins':'assets/members/a86df778dd0c81e1.jpg',
+  'Nick Cruz':'assets/members/55394c47f1fb44c5.jpg','Jeff Tate':'assets/members/535fb92670d59e48.jpg',
+  'River Kline':'assets/members/682bebf952ed079e.jpg','Brier Thompson':'assets/members/82c8205ca20eb19a.jpg',
+  'Amanda Johnson':'assets/members/ecee3dc923a87fd4.jpg','Robert Shively':'assets/members/fed69c4f21cf3603.jpg',
+  'Blayne Peterman':'assets/members/900a2fa864618943.jpg','Brandon Hunter':'assets/members/51cb1052fd02875b.jpg',
+  'Krazy Kat Ladies':'assets/members/94cf5b5675659794.jpg','Auzzie Dangerous':'assets/members/e7da2b8fdb4b0b46.jpg',
+  'Kevin Miller':'assets/members/0f48f0323424c1f1.jpg','Jacob Leake':'assets/members/7d1663fa65b260ae.jpg',
+  'James Capehart':'assets/members/989ee61964e3afa5.jpg','Matt Stewart':'assets/members/3beefaf8416e1907.jpg',
+  'Chris Poor':'assets/members/b8f9f148b79a790c.jpg','Corey Jeffers':'assets/members/43ba88258188c374.jpg',
+  'Tom Nunley':'assets/members/3ae36b1d9660f4fc.jpg','Jon Myers':'assets/members/80cc867dad1003e7.jpg'
+};
+const lifetimeStats = Object.fromEntries([
+  ["Charles Woods",1,1,1,1,0,400],["Michael Gallaugher",1,0,0,0,0,0],["Scott Hickman",2,0,0,0,0,0],["Justin Scheuerman",1,0,0,0,0,0],["Robert Biehler",1,1,0,0,0,0],["Kyle Harman",2,2,2,2,0,3360],
+  ["Matthew Collene",1,0,0,0,0,0],["Austyn Ray",1,0,0,0,0,0],["David Rose",1,0,0,0,0,0],["Kristian Moore",1,0,0,0,0,0],
+  ["John Ratliff",2,2,0,0,0,0],["Robert Ratliff",1,0,0,0,0,0],["Steven Mills, Jr",1,0,0,0,0,0],["Jason Berenato",2,0,0,0,0,0],
+  ["Cage Keysor",3,0,0,0,0,0],["Mark Rupe",1,0,0,0,0,0],["Skip Martin",7,7,4,4,0,2056],["Justin Roberts",6,4,1,0,0,430],
+  ["Bryan Mellon",1,1,1,0,0,0],["Brandon Penwell",1,0,0,0,0,0],["Anthony Smith",2,0,0,0,0,0],["John Drummond",3,0,0,0,0,0],
+  ["Justin Johnston",3,2,1,0,0,392],["Justin Cantrell",2,1,0,0,0,0],["Clint Bafford",6,3,0,0,0,0],["Nicholas Wilson",3,2,1,1,0,588],
+  ["Andrew Chanthathirath",1,0,0,0,0,0],["Cameron Marriott",6,0,0,0,0,0],["Aubrey Boykin",1,0,0,0,0,0],["Jack Richardson",4,0,0,0,0,0],
+  ["Kayak Mike",1,1,0,0,0,0],["Gage Smith",1,0,0,0,0,0],["Peter Domin",2,0,0,0,0,0],["Clayton Adkins",3,1,1,0,0,0],
+  ["Amanda Johnson",2,0,0,0,0,0],["Jeff Tate",7,3,1,1,0,350],["Brier Thompson",1,1,1,0,0,0],["Curtis Cunningham",4,0,0,0,0,0],
+  ["Krazy Kat Ladies",8,5,0,0,0,0],["Robert Shively",7,0,0,0,0,0],["Troy Geer",8,3,0,0,0,440],["Brandon Hunter",8,6,3,2,0,2367],
+  ["Blayne Peterman",8,7,3,2,1,3944],["Dan Phelps",4,1,1,1,0,1470],["Auzzie Dangerous",9,4,2,1,0,1430],["James Capehart",1,0,0,0,0,0],
+  ["William Sobers",1,0,0,0,0,0],["Kevin Miller",1,0,0,0,0,0],["Jacob Leake",8,6,5,3,2,6125],["Chris Poor",8,2,1,1,0,588],
+  ["Corey Jeffers",9,7,5,3,2,5155],["Jon Myers",7,0,0,0,0,0],["Matt Stewart",9,8,5,2,2,5215],["Tom Nunley",2,0,0,0,0,0],
+  ["Nick Bays",1,1,1,1,1,2365],["Matt Groeschel",1,1,1,1,0,1075],["Jeff Mccafferty",1,1,1,0,0,0],["JOHN COTTERMAN",1,0,0,0,0,0],
+  ["Teddy Ivey",1,0,0,0,0,0],["Rasin Cain",2,0,0,0,0,0],["Wesley Brofford",1,0,0,0,0,0],["Paul Payne",2,0,0,0,0,0]
+].map(([name,eventsFished,top10,top5,top3,wins,winnings])=>[name,{eventsFished,top10,top5,top3,wins,winnings}]));
+const emptyLifetimeStats = {eventsFished:0,top10:0,top5:0,top3:0,wins:0,winnings:0};
+const verifiedRecords = Object.fromEntries([
+  ["Charles Woods",125,"Seneca Lake",29.25,"Blue catfish","Seneca Lake"],
+  ["Amanda Johnson",54.75,"Hoover Reservoir",26.5,"Blue catfish","Hoover Reservoir"],["Andrew Chanthathirath",107.25,"Hoover Reservoir",34.5,"Blue catfish","Hoover Reservoir"],
+  ["Anthony Smith",54.5,"Rocky Fork",28,"Channel catfish","Rocky Fork"],["Aubrey Boykin",53.75,"Hoover Reservoir",28.75,"Blue catfish","Hoover Reservoir"],
+  ["Austyn Ray",85.5,"Sandusky Bay — June 20",32.25,"Channel catfish","Sandusky Bay — June 20"],["Auzzie Dangerous",151.75,"Sandusky Bay — June 20",37.5,"Blue catfish","Caesar Creek"],
+  ["Blayne Peterman",187.5,"Hoover Reservoir",40,"Blue catfish","Hoover Reservoir"],["Brandon Hunter",166,"Sandusky Bay — May 24",34.5,"Channel catfish","Sandusky Bay — May 24"],
+  ["Brandon Penwell",51.5,"Rocky Fork",28,"Channel catfish","Rocky Fork"],["Brier Thompson",173.5,"Hoover Reservoir",41.5,"Blue catfish","Hoover Reservoir"],
+  ["Bryan Mellon",138.5,"Caesar Creek",33,"Blue catfish","Caesar Creek"],["Cage Keysor",79.5,"Deer Creek",29,"Channel catfish","Deer Creek"],
+  ["Cameron Marriott",146.5,"Sandusky Bay — May 24",34,"Blue catfish","Caesar Creek"],["Chris Poor",149.75,"Rocky Fork",32.25,"Channel catfish","Rocky Fork"],
+  ["Clayton Adkins",153.25,"Sandusky Bay — May 24",38,"Blue catfish","Hoover Reservoir"],["Clint Bafford",154,"Hoover Reservoir",39,"Blue catfish","Hoover Reservoir"],
+  ["Corey Jeffers",179,"Hoover Reservoir",41,"Blue catfish","48-Hour All-Ohio"],["Curtis Cunningham",132,"Sandusky Bay — June 20",30,"Channel catfish","Sandusky Bay — June 20"],
+  ["Dan Phelps",151,"Rocky Fork",33.5,"Channel catfish","Rocky Fork"],["David Rose",142.75,"Sandusky Bay — June 20",30.25,"Channel catfish","Sandusky Bay — June 20"],
+  ["Gage Smith",25.75,"Hoover Reservoir",25.75,"Blue catfish","Hoover Reservoir"],["Jack Richardson",32.25,"Sandusky Bay — May 24",32.25,"Channel catfish","Sandusky Bay — May 24"],
+  ["Jacob Leake",182.5,"Hoover Reservoir",42.5,"Blue catfish","48-Hour All-Ohio"],["Jason Berenato",130.75,"Sandusky Bay — June 20",31.5,"Channel catfish","Sandusky Bay — May 24"],
+  ["Jeff Tate",150.75,"Sandusky Bay — June 20",40.5,"Blue catfish","Hoover Reservoir"],["John Drummond",146.75,"Sandusky Bay — May 24",30.5,"Channel catfish","Sandusky Bay — May 24"],
+  ["John Ratliff",154,"Sandusky Bay — May 24",34.75,"Flathead catfish","48-Hour All-Ohio"],["Jon Myers",146.5,"Sandusky Bay — May 24",32.5,"Blue catfish","Hoover Reservoir"],
+  ["Justin Cantrell",157,"Hoover Reservoir",39,"Blue catfish","Hoover Reservoir"],["Justin Johnston",157.25,"Sandusky Bay — June 20",33.5,"Channel catfish","Sandusky Bay — June 20"],
+  ["Justin Roberts",157,"Sandusky Bay — May 24",40,"Flathead catfish","Indian Lake 24-Hour"],["Kayak Mike",155.5,"Sandusky Bay — June 20",32.25,"Channel catfish","Sandusky Bay — June 20"],
+  ["Kevin Miller",28,"Rocky Fork",28,"Channel catfish","Rocky Fork"],["Krazy Kat Ladies",159.25,"Sandusky Bay — May 24",34,"Channel catfish","Sandusky Bay — May 24"],
+  ["Kristian Moore",117.5,"Sandusky Bay — May 24",33.75,"Channel catfish","Sandusky Bay — May 24"],["Kyle Harman",165,"Sandusky Bay — June 20",51,"Blue catfish","48-Hour All-Ohio"],
+  ["Matt Stewart",174.5,"Caesar Creek",46,"Blue catfish","Hoover Reservoir"],["Matthew Collene",78.75,"Sandusky Bay — June 20",28.75,"Channel catfish","Sandusky Bay — June 20"],
+  ["Michael Gallaugher",110,"Deer Creek",24,"Channel catfish","Deer Creek"],["Nicholas Wilson",165,"Sandusky Bay — May 24",34,"Channel catfish","Sandusky Bay — May 24"],
+  ["Robert Biehler",154.5,"Sandusky Bay — June 20",32,"Channel catfish","Sandusky Bay — June 20"],["Robert Ratliff",149.75,"Sandusky Bay — May 24",33.25,"Channel catfish","Sandusky Bay — May 24"],
+  ["Robert Shively",153.75,"Sandusky Bay — May 24",38.5,"Blue catfish","Hoover Reservoir"],["Skip Martin",166,"Sandusky Bay — May 24",41,"Flathead catfish","48-Hour All-Ohio"],
+  ["Troy Geer",155,"Sandusky Bay — May 24",35.25,"Channel catfish","Sandusky Bay — May 24"],["William Sobers",20.75,"Rocky Fork",20.75,"Channel catfish","Rocky Fork"],
+  ["Nick Bays",108.25,"Indian Lake 24-Hour",39.5,"Flathead catfish","Indian Lake 24-Hour"],["Matt Groeschel",102,"Indian Lake 24-Hour",38.25,"Flathead catfish","Indian Lake 24-Hour"],
+  ["Jeff Mccafferty",89,"Indian Lake 24-Hour",32.25,"Flathead catfish","Indian Lake 24-Hour"],["JOHN COTTERMAN",78.5,"Indian Lake 24-Hour",29.75,"Channel catfish","Indian Lake 24-Hour"],
+  ["Teddy Ivey",77.75,"Indian Lake 24-Hour",27,"Channel catfish","Indian Lake 24-Hour"],["Rasin Cain",92.75,"48-Hour All-Ohio",27.25,"Channel catfish","Indian Lake 24-Hour"],
+  ["Wesley Brofford",30,"Indian Lake 24-Hour",30,"Flathead catfish","Indian Lake 24-Hour"]
+].map(([name,bestScore,bestScoreEvent,biggestFish,biggestFishSpecies,biggestFishEvent])=>[name,{bestScore,bestScoreEvent,biggestFish,biggestFishSpecies,biggestFishEvent}]));
+const memberInitials = name => {
+  const parts = name.replace(/[^A-Za-z0-9 ]/g,' ').split(/\s+/).filter(Boolean);
+  return `${parts[0]?.[0] || 'K'}${parts.length > 1 ? parts[parts.length-1][0] : ''}`.toUpperCase();
+};
+const memberSlug = name => name.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const rosterPhoto = name => memberPhotos[name] ? `${memberPhotos[name]}?v=3` : '';
+const anglers = memberNames.map(name => ({name,rank:'Official member',initials:memberInitials(name),photo:rosterPhoto(name),stats:'Katyakers of Ohio · Fishing Chaos roster'}));
+const featuredAnglers = featuredAnglersBase.map(angler => ({...angler,photo:rosterPhoto(angler.name)}));
+const votes = [
+  {name:'Jacob Leake',votes:124},{name:'Cage Keysor',votes:74},{name:'Clayton Adkins',votes:48},
+  {name:'Skip Martin',votes:34},{name:'Chris Poor',votes:33},{name:'Krazy Kat Ladies',votes:24},
+  {name:'Clint Bafford',votes:10},{name:'Matt Stewart',votes:10},{name:'Cameron Marriott',votes:9},
+  {name:'Jon Myers',votes:9},{name:'Blayne Peterman',votes:8},{name:'Corey Jeffers',votes:8},
+  {name:'Dan Phelps',votes:7},{name:'Jeff Tate',votes:5},{name:'Justin Johnston',votes:5},
+  {name:'Troy Geer',votes:4},{name:'Brier Thompson',votes:2},{name:'Brandon Hunter',votes:2},
+  {name:'John Drummond',votes:2},{name:'Austin Harding',votes:1},{name:'David Rose',votes:1},
+  {name:'Jason Berenato',votes:1},{name:'John Ratliff',votes:1}
+];
+const votesLastUpdated = 'July 23, 2026 at 7:03 PM ET';
+const voteVoters = {"Jacob Leake":["Allison Leake","Amber Lehman","Andy Ward Jr.","Angela Leake","Asa Bentley","Ashlie Hurst","Ashton Ray Kasler","Bertie Clement","Bethany Young","Bill Craig","Billy Entingh","Brandon Schrader","Brian Lehman","Brittany Leake","Brittany Walls","Candy Blevins","Charlene Berry","Cherokiee Mohler","Chris Allen Goodwin","Colin Turner","Courtney Glover","Crystal Dawn","Dalton Hurst","Dan Chesser","Daniel Large","Dave Thompson","David Chalfant","David McCoy","Debbi Sue","Destiny Warren","Emily Maye","Evan Ross","Fred Cox","Gene Bourne","Glen Burchfield","Jack Scoles","Jacob Gray","Jacob Leake","Jaden Stiltner","Jakob Kline","Jana Sue Lehman","Jared Bartow","Jared Lewellyn","Jasmine Chandler","Jay Stiltner","Jennetta Polly","Joe Owens","Johnny Hammersticks","Jonathan Maye","Joscelyn Jones","Josh Entingh","Josh Snyder","Josh Upchurch","Joyce Evans","Justen Patterson","Justin Tolliver","Katlin Nicole Leake","Kenny Sigler","Kermit Berry","Kim FisherBag","Kimberly Louise","Krystal Williams","Lawrence Dotson","Louis Warr","Luke Blosser","Man Rose","Megan Studebaker","Meghann Shearer","Michael Bourne","Michael Fabbro","Michael Holmes","Misti Louise","Misty Maye","Nicholas Andrew Leake","Peyton Chandler","Randle Rains","Richard Leake","Ricky Moorehead","Robert Kilkenny","Ron Hughes","Rose Bruce","Rose Hurley Shaver","Ross Asbury","Rusty Dusty","Samantha Glover","Samantha Holschuh","Sarah Deer","Sebastian Wiseman","Shane Holschuh","Shawn Douglas","Shawn Hurst","Shawn Wiseman","Shiasa Turner","Stephanie Mcclurg-Stiltner","Susan Williams","Tabby Goodwin","Tabitha Goodwin","Tami Riffle","Tammy Miller","Tiffany Rife","Tina Stutler","Todd Chandler","Troy Glover","Tyler Vickroy","Vernon Staley","Zachary Gibbs"],"Cage Keysor":["Aaliya Larsen","April Dawn","Ashton Fuller","Austin Combs","Beliah Schnell","Bobbi Jo Redding","Branden Young","Cameron Hand","Carson Liming","Chris Klewer","Chunkk Houser","Clay Drummond","Cole Leiss","Colton Fetters","Corbin Kayne","Damien Younger","Danya Bryson","David Klingbeil","Derek Summers","Dylan Caudill","Elaine Garrett","Hurbzi","Jj Eves","Jordan Carolus","Jose Melendez","Joseph Springer","Joshua Pontious","Kayla Summers","Kenyon Sears","Kimmi Kaye","LaTisha Liming","Liv Springer","Marshall Denney","Matt Borger","Michael Dale Schooley","Michael Posada","Milo Keysor","Myles Bonifas","Nate Bowman","Nate Longwell","Noah Leininger","Prosper Bryant","Ray Melioli","Ricky Joseph Raudabaugh","Ross Klosterman","Ryan Sanning","Sandy Ebright","Seth Huston","Spencer Wannemacher","Tristan Peck","Tyler Franklin","Vicki Masonbrink","Zach Spinns"],"Clayton Adkins":["April Adkins","Belinda Crane","Ben Arnold","Braedon Drummond","Brenda Leisure","Brittany Arnold","Calvin N Emma Lemaster","Charlie Cardwell","Clayton Adkins","Cory Lombard","Dawn Scott","Deanna Bumgardner","Debbie Campbell","Debbie Daugherty","Emily Adkins Ollangg","Hannah Mollette","Jason Dana Stewart","Jenifer Campbell","Jessica Reynolds","John Bumgardner","Kathy Adkins","Kris Uhlig Miller","Matthew Adkins","Michael Fooce","Michelle Long Anders","Molly Bumgardner Stone","Nicky Heiser","Nik Hayes","Rachel Bumgardner","Richard Kevin Fox","Shane Bumgardner","Taylor Speakman","Tracy Nicole Adkins","Troy Adams","Twila Trein"],"Chris Poor":["A.D. Grierson","Adam Peace","Ann Smith","Anthony Grierson","Brandon Neeley","Chelsea Moser","Danielle Shanley","Danny Lamb","David Heidorn","Dustin Poor","Haley Heidorn","Hannah Marcum","Hayley Hamblin","Julie Jones","Keiran Engle","Kelly Haston","Kenneth Crabtree","Kim Maness","Lindsay Hambly","Lisa Black Hance","Lori Pence","Mandi Lawwill","Mike Buis","Mike Smart","Rachel Scott-Miller","Ronnie Lawson","Tammy Peters-Poor","Teri Frazier","Terry C Parsons","Tina Vaughn","Tyler Shane","Victoria Lynne Davis"],"Krazy Kat Ladies":["Aiden Tackett","Bernice White","Bettina Lemaster","Brianna Jo Sharrock","Bryan Mellon","Colin McAdams","Corey Jeffers","Hiltibran C James","Jackie Huggins","Janet Hopper","Janna Stone","Jeffrey W Sharrock","Jennifer Lynn Hood","Jennifer Shaw","Jessica Asbury","Jodi Mitchell","Jordan Elizabeth","Kaylee Carol Ann","Mark Blauvelt","Natalie Taylor"],"Skip Martin":["Blaze Fox","Dewayne Hunter","Gabi Blackivory","James Bink Fox","Jason Adams","Johnnie Fortner","Kevin Blough","Nancy Frye","Rafe Reynolds","Richard Jackson","Robert Biehler","Sandra Martin","Sergio Rodriguez","Steve Gray","William Roberts"],"Clint Bafford":["Courtney Rouse","David Christy","Jack Richardson","Jef Bafford","Neysa Leichty","Sara Marie O'Daniels","Shawnya Marie Scott","Tracy Christy","Travis Christy"],"Jon Myers":["Alex Brown","Ben Kopacz","Cameron Marriott","Michelle Demchock McKee","Nathan Karpinski","Renea Myers","Seth Myers","Shirley Ann Myers","Tori Robb"],"Matt Stewart":["Ami Stewart","Blayne Peterman","Bri Anne","Hope Stewart","Jon Calcara","Julie Calcara","Phil Neff","Shari Scarff","Trish Devaney"],"Cameron Marriott":["Ashlee Watts","Jobie McCoy","Jonathon Myers","Keith Wallington","Laura Wallington","Micha Marriott","Rebecca Miler","Sandi Hoffman"],"Blayne Peterman":["Crenly Marrero","Isaac Anderson","Mary Sophia Grace Peterman","Matt Stewart","Matthew Dickson","Troy Reeg"],"Corey Jeffers":["Brad Adams","Hunter Butin","Justin Roberts","Kevin Harvey","Pam Smith","Paula Hood"],"Dan Phelps":["Joe Brickner","Keith Miller","Lonnie Rigsby","Mike Mentges","Ryan Mi","Tosh T Collins"],"Jeff Tate":["Amber Marie Jeffers","David Adkins","Gina Thomas","Jessica Valentine","Sara Tate"],"Justin Johnston":["Bryan Paul Leonard","Jared Mitchem","Joe Byrum","Pete J Craft"],"Brier Thompson":["Ciara Thompson","Ruth Thompson"],"John Drummond":["Michael Bell","Tina Skaggs"],"Troy Geer":["Denise Kraft","Tina Kraft Purnell"],"Brandon Hunter":["Jeff Tate"],"Jason Berenato":["Diane Smith"],"John Ratliff":["Tamara Ratlips"]};
+voteVoters['Jacob Leake'].push('Alyson Lafollette','Ben Odom','Bobbi Moore','Nathan Reiling','Patrick Milner','Tanner Emerson');
+voteVoters['Cage Keysor'].push('Austin Snyder','Connor Keiber','Roberts Guy');
+voteVoters['Clint Bafford'].push('Angie Beau Burns');
+voteVoters['Corey Jeffers'].push('Clint Bafford');
+voteVoters['Clayton Adkins'].push('Emma Fisher');
+voteVoters['Matt Stewart'].push('Andi Stewart Cawley');
+voteVoters['Blayne Peterman'].push('Deena Jacqueline');
+voteVoters['Jacob Leake'].push('Bill Taylor');
+voteVoters['Jacob Leake'].push('Brenda Zirkle');
+voteVoters['Skip Martin'].push('Ron Brown');
+voteVoters['Cage Keysor'].push('Larry Blackburn');
+voteVoters['Corey Jeffers'].push('Mark Rupe');
+voteVoters['Jacob Leake'].push('Cory Stewart','Jackie Bickley-glover');
+voteVoters['Krazy Kat Ladies'].push('Carla Hood-Taylor','Mike Taylor');
+voteVoters['Cage Keysor'].push('Austin Robinson');
+voteVoters['Troy Geer'].push('Shane Peleras');
+voteVoters['Troy Geer'].push('Nora Svatek');
+voteVoters['Jacob Leake'].push('Gage Smith');
+voteVoters['Chris Poor'].push('Missy Jessie');
+voteVoters['Clayton Adkins'].push('Sue Barker');
+voteVoters['Cage Keysor'].push('Amanda Bowman','Jared Osborne','Jon Redding');
+voteVoters['Dan Phelps'].push('Hunter Hatcher');
+voteVoters['Krazy Kat Ladies'].push('Ashleigh Campbell');
+voteVoters['Jacob Leake'].push('Ashley Turben','Hayden Boggess','Josh Peoples','Kristi Preston','Nathan Hagan','Tyler Culbertson');
+voteVoters['Cage Keysor'].push('Brian Rivera','Cameron Patrick','Dalton Fuson','Debra Brewer','Emily Baker','Gage Larsen','Jj Mccanless','Keyton Liming','Lena Nguyen','Logan Brosher','Paije Forsthoefel','Shania Emans');
+voteVoters['Clayton Adkins'].push('Annie Hollobaugh','Chrystal Adkins','Eva Dean Fields','Jennifer Cavins','Jessica Lynn Jude','Tammy Castle Gonzalez','Tara Blanton');
+voteVoters['Skip Martin'].push('Aaron Sadler','Anthony Smith','Brody Forgrave','Brooke Johnson','Carley Jeffers','Eddie Cooper Jr.','Garrett Horsley','Isaiah Price','James Shaw II','Kayden Boyer','Kirk Kincaid','Lance Wooley','Mark Rupe','May Mchenry','Michelle Jeffers','Shane Folden','Tony Jordan');
+voteVoters['Skip Martin'].push('Reece Clason');
+voteVoters['Blayne Peterman'].push('Scott Michael');
+voteVoters['Cameron Marriott'].push('Alissa Taylor');
+voteVoters['Corey Jeffers'] = voteVoters['Corey Jeffers'].filter(name => name !== 'Mark Rupe');
+voteVoters['Corey Jeffers'].push('Matthew Jeffers');
+voteVoters['Justin Johnston'].push('Jason Seymour');
+voteVoters['Brandon Hunter'].push('Robert Andrews');
+voteVoters['Austin Harding'] = ['Brandon Hunter'];
+voteVoters['David Rose'] = ['Wade Rose'];
+voteVoters['Jacob Leake'] = voteVoters['Jacob Leake'].filter(name => name !== 'Candy Blevins');
+voteVoters['Jacob Leake'].push('Candy Chandler');
+voteVoters['Cage Keysor'] = voteVoters['Cage Keysor'].filter(name => name !== 'Kenyon Sears');
+voteVoters['Cage Keysor'].push('Leroy Newland');
+voteVoters['Cage Keysor'].push('Mt Bf');
+voteVoters['Clayton Adkins'].push('Brenda Corney Macalou','Elizabeth Shanell Craven','Ruth Adkins');
+voteVoters['Krazy Kat Ladies'].push('Jay Fisher');
+voteVoters['Jacob Leake'].push('James Mahan');
+voteVoters['Clayton Adkins'].push('Travis Bumgardner');
+Object.values(voteVoters).forEach(names => names.sort((a,b) => a.localeCompare(b)));
+const products = [
+  {id:'trail-tee',name:'Official Trail Tee',price:30,category:'apparel',badge:'New',image:'assets/merch/official-trail-tee.webp',description:'The official Katyakers of Ohio trail logo tee.',sizes:['S','M','L','XL','2XL','3XL'],sizeAdjustments:{'2XL':2,'3XL':4},checkout:{base:'https://buy.stripe.com/fZu14n5Kue4Y6NL7OG18c01','2XL':'https://buy.stripe.com/eVqeVd3Cmf922xv5Gy18c04','3XL':'https://buy.stripe.com/dRm14na0K1ic8VTd9018c05'}},
+  {id:'schedule-tee',name:'2026 Schedule Tee',price:30,category:'apparel',badge:'New',image:'assets/merch/schedule-tee.webp',description:'The complete 2026 Katyakers tournament schedule in one bold design.',sizes:['S','M','L','XL','2XL','3XL'],sizeAdjustments:{'2XL':2,'3XL':4},checkout:{base:'https://buy.stripe.com/eVqaEXdcWf92dc98SK18c00','2XL':'https://buy.stripe.com/aFafZhb4O1ic5JHfh818c06','3XL':'https://buy.stripe.com/3cI28rb4Of92c85ed418c07'}},
+  {id:'logo-hoodie',name:'Tournament Logo Hoodie',price:55,category:'apparel',badge:'Coming soon',art:'COMING SOON',sub:'TOURNAMENT LOGO HOODIE',comingSoon:true},
+  {id:'snapback',name:'Official Trail Snapback',price:33,category:'headwear',badge:'New',image:'assets/merch/official-trail-snapback.webp',description:'Gray-and-blue flat-bill snapback featuring the official Katyakers trail logo.',checkout:{base:'https://buy.stripe.com/14A00jdcW5ysegdc4W18c02'}}
+];
+
+let cart = JSON.parse(localStorage.getItem('katyakersCartV3') || '[]');
+let rosterExpanded = false;
+let publicProfiles = {};
+let currentAccount = null;
+let requestedProfileMember = '';
+let lastFocused = null;
+const $ = selector => document.querySelector(selector);
+const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
+
+function renderStandings(){
+  const championshipField = standings.filter(item => item.rank <= 15);
+  $('#standingsTable').innerHTML = championshipField.map(item => {
+    const publicName = item.displayName || memberDisplayName(item.name);
+    const cutLine = item.rank === 15 ? '<span class="cut-line">Championship cut line</span>' : '';
+    return `<div class="standing-row ${item.rank===15?'cut-line-row':''}"><span class="pos">${String(item.rank).padStart(2,'0')}</span><div class="standing-person"><img class="standing-thumb" src="/${rosterPhoto(item.name)}" alt="${escapeHtml(publicName)}" loading="lazy"><div><h3>${escapeHtml(publicName)}</h3><p>Official series rank #${item.rank}</p>${cutLine}</div></div><strong class="points">${item.points} <small>PTS</small></strong></div>`;
+  }).join('');
+}
+function renderEvents(){
+  $('#eventGrid').innerHTML = events.map(event => `<a class="event-card ${event.next?'next':''}" href="${event.url}" target="_blank" rel="noopener" aria-label="${event.seriesFallback?'Open the official series tournament list for':`Open ${event.name} on`} Fishing Chaos"><div class="date-box"><span>${event.month}</span><strong>${event.day}</strong></div><div class="event-copy"><h3>${event.name}</h3><p>${event.detail}</p><span class="event-link">${event.seriesFallback?'Open series tournaments':'View tournament'} ↗</span></div><span class="status ${event.done?'complete':event.status==='Upcoming'?'upcoming':'open'}">${event.status}</span></a>`).join('');
+}
+function renderAnglers(){
+  const list = rosterExpanded ? anglers : featuredAnglers;
+  const grid = $('#anglerGrid');
+  grid.classList.toggle('full-roster',rosterExpanded);
+  grid.innerHTML = list.map(angler => {
+    const profile=publicProfiles[angler.name];
+    const publicName=profile?.display_name||memberDisplayName(angler.name);
+    const method=profile?.fishing_method ? profile.fishing_method[0].toUpperCase()+profile.fishing_method.slice(1) : '';
+    const details=profile?[method,profile.hometown,profile.favorite_water].filter(Boolean).join(' · '):angler.stats;
+    const url=`/anglers/${memberSlug(angler.name)}`;
+    return `<article class="angler-card ${profile?'claimed':''}"><a class="angler-card-link" href="${url}" aria-label="View ${escapeHtml(publicName)} profile"><div class="angler-image">${angler.photo?`<img src="/${angler.photo}" alt="${escapeHtml(publicName)}" loading="lazy" decoding="async">`:`<span aria-hidden="true">${angler.initials}</span>`}</div><div class="angler-info"><span>${profile?'✓ Claimed profile':angler.rank}</span><h3>${escapeHtml(publicName)}</h3>${publicName!==angler.name?`<p class="roster-name">${escapeHtml(angler.name)}</p>`:''}<div class="angler-stats">${escapeHtml(details||'Katyakers of Ohio member')}</div>${profile?.bio?`<p class="angler-bio">${escapeHtml(profile.bio)}</p>`:''}<strong class="view-profile">View profile <span aria-hidden="true">→</span></strong></div></a></article>`;
+  }).join('');
+  $('#showAllAnglers').textContent = rosterExpanded ? 'Show featured' : 'View full roster';
+  $('#showAllAnglers').setAttribute('aria-expanded',String(rosterExpanded));
+}
+function escapeHtml(value=''){return String(value).replace(/[&<>'"]/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[character]))}
+function renderNews(){
+  const grid=$('#newsGrid');
+  if(!grid)return;
+  grid.innerHTML=newsArticles.map((article,index)=>`<article class="news-card ${index===0?'featured-news':''}"><a class="news-card-link" href="/news/${article.slug}" aria-label="Read ${escapeHtml(article.title)}"><div class="news-image ${index%3===1?'blue':index%3===2?'black':''}"><span>${escapeHtml(article.event)} · ${escapeHtml(article.date)}</span><b>${escapeHtml(article.cardBanner||(article.podium?`${article.podium[0][0]} wins`:'Trail news'))}</b></div><div class="news-card-copy"><span>${escapeHtml(article.category||'Tournament recap')}</span><h3>${escapeHtml(article.title)}</h3><p>${escapeHtml(article.dek)}</p><strong>Read full article <span aria-hidden="true">→</span></strong></div></a></article>`).join('');
+}
+function renderNewsArticlePage(){
+  const page=$('#newsArticlePage');
+  const match=location.pathname.match(/^\/news\/([^/]+)\/?$/);
+  if(!match){page.hidden=true;return}
+  document.body.classList.add('news-article-route');
+  $('.brand').setAttribute('href','/');
+  document.querySelectorAll('.main-nav a[href^="#"], footer a[href^="#"]').forEach(link=>link.setAttribute('href',`/${link.getAttribute('href')}`));
+  page.hidden=false;
+  const article=newsArticles.find(item=>item.slug===decodeURIComponent(match[1]).toLowerCase());
+  if(!article){document.title='Article not found | Katyakers of Ohio';$('#newsArticleContent').innerHTML='<div class="profile-not-found"><span class="eyebrow dark">TRAIL NEWS</span><h1>Article not found</h1><p>That tournament recap is not available.</p></div>';return}
+  document.title=`${article.title} | Katyakers of Ohio`;
+  const facts=article.facts||[[article.anglers,'Anglers'],[article.fish,'Fish submitted'],[article.time,'Event window']];
+  const sidebarTitle=article.sidebarTitle||'Top three';
+  const sidebarItems=article.sidebarItems||article.podium;
+  const highlight=article.highlight||['Big Fish',article.bigFish[0],article.bigFish[1]];
+  const sources=article.sources||[['Fishing Chaos results',article.chaosUrl],['Katyakers Facebook updates','https://www.facebook.com/KATYAKERSOUTFITTERS']];
+  const factNote=article.factNote||'Through nine completed events, Katyakers anglers recorded 1,225 fish entries. Fishing Chaos remains the source of record for official results.';
+  const factsHtml=facts.map(([value,label])=>`<div><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join('');
+  const sidebarHtml=sidebarItems.map(([name,score],index)=>`<li><span>${index+1}</span><div><strong>${escapeHtml(name)}</strong><small>${escapeHtml(score)}</small></div></li>`).join('');
   const sourcesHtml=sources.map(([label,url])=>`<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(label)} ↗</a>`).join('');
   const paragraphs=article.paragraphs.map(paragraph=>`<p>${escapeHtml(paragraph)}</p>`).join('');
   const speciesHtml=article.speciesWinners?`<div class="species-winners">${article.speciesWinners.map(([species,name,length])=>`<article><span>${escapeHtml(species)}</span><strong>${escapeHtml(length)}</strong><small>${escapeHtml(name)}</small></article>`).join('')}</div>`:'';
@@ -311,4 +580,3 @@ $('#drawerBackdrop').addEventListener('click',closeCart);
 $('#checkoutButton').addEventListener('click',requestOrder);
 
 renderStandings();renderEvents();renderAnglers();renderNews();renderAnglerProfilePage();renderNewsArticlePage();renderLiveBroadcast();renderProducts();renderCart();updateCountdown();loadPublicProfiles();if(location.hash==='#claim-profile')openProfileModal();setInterval(updateCountdown,60000);
-
