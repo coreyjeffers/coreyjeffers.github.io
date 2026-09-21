@@ -57,7 +57,7 @@ const standings = [
   },
   {
     "rank": 13,
-    "name": "Clint Bafford",
+    "name": "Clint Bafford", "championshipEligible": false,
     "points": 448
   },
   {
@@ -88,7 +88,7 @@ const events = [
   {month:'AUG',day:'7–9',name:'48-Hour All-Ohio',detail:'43 anglers · 143 accepted fish · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/yvSiToIoNhEW0DO8TXw4'},
   {month:'AUG',day:'15–16',name:'Indian Lake 24-Hour',detail:'23 anglers · 128 fish entries · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/CibEwf4GgRCAQAQ5V0kz'},
   {month:'SEP',day:'12',name:'Ohio River',detail:'15 anglers · 45 fish entries · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/ziSP9LjG69LXOGJHOA9f'},
-  {month:'OCT',day:'10',name:'Championship',detail:'Top 15 AOY anglers · $5,000 added',status:'Qualified field',next:true,url:FISHING_CHAOS_SERIES_TOURNAMENTS_URL,seriesFallback:true}
+  {month:'OCT',day:'10',name:'Championship',detail:'14-angler championship field · $5,000 added',status:'Qualified field',next:true,url:FISHING_CHAOS_SERIES_TOURNAMENTS_URL,seriesFallback:true}
 ];
 const newsArticles = [
 {
@@ -609,7 +609,7 @@ const $ = selector => document.querySelector(selector);
 const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
 
 function renderStandings(){
-  const championshipField = standings.filter(item => item.rank <= 15);
+  const championshipField = standings.filter(item => item.rank <= 15 && item.championshipEligible !== false);
   $('#standingsTable').innerHTML = championshipField.map(item => {
     const publicName = item.displayName || memberDisplayName(item.name);
     const cutLine = item.rank === 15 ? '<span class="cut-line">Championship cut line</span>' : '';
@@ -733,7 +733,7 @@ function renderCart(){
 }
 function toast(message){const element=$('#toast');element.textContent=message;element.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>element.classList.remove('show'),1800)}
 function updateCountdown(){
-  $('#countdown').innerHTML='<div><strong>15</strong><span>Qualified anglers</span></div>';
+  $('#countdown').innerHTML='<div><strong>14</strong><span>Championship anglers</span></div>';
 }
 function setMenu(open){const nav=$('#mainNav'),button=$('#menuToggle');nav.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close navigation':'Open navigation')}
 function openCart(){lastFocused=document.activeElement;$('#cartDrawer').classList.add('open');$('#cartDrawer').setAttribute('aria-hidden','false');$('#drawerBackdrop').hidden=false;requestAnimationFrame(()=>$('#drawerBackdrop').classList.add('open'));$('#cartButton').setAttribute('aria-expanded','true');document.body.classList.add('drawer-open');$('#closeCart').focus()}
@@ -787,4 +787,3 @@ $('#drawerBackdrop').addEventListener('click',closeCart);
 $('#checkoutButton').addEventListener('click',requestOrder);
 
 renderStandings();renderEvents();renderAnglers();renderNews();renderAnglerProfilePage();renderNewsArticlePage();renderLiveBroadcast();renderProducts();renderCart();updateCountdown();loadPublicProfiles();if(location.hash==='#claim-profile')openProfileModal();setInterval(updateCountdown,60000);
-
