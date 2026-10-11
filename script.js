@@ -1,76 +1,216 @@
-const standings = [
+// Best five event scores, including championship and applicable Big Fish bonuses.
+const finalAoy = [
+  {
+    "rank": 1,
+    "name": "Jacob Leake",
+    "points": 498,
+    "countedScores": [
+      102,
+      100,
+      100,
+      99,
+      97
+    ],
+    "championshipPoints": 94
+  },
   {
     "rank": 2,
     "name": "Corey Jeffers",
-    "points": 494
+    "points": 497,
+    "countedScores": [
+      102,
+      100,
+      100,
+      98,
+      97
+    ],
+    "championshipPoints": 100
   },
   {
     "rank": 3,
     "name": "Matt Stewart",
-    "points": 492
+    "points": 495,
+    "countedScores": [
+      100,
+      100,
+      99,
+      98,
+      98
+    ],
+    "championshipPoints": 99
   },
   {
     "rank": 4,
     "name": "Skip Martin",
-    "points": 486
+    "points": 487,
+    "countedScores": [
+      98,
+      98,
+      98,
+      98,
+      95
+    ],
+    "championshipPoints": 95
   },
   {
     "rank": 5,
     "name": "Blayne Peterman",
-    "points": 485
+    "points": 485,
+    "countedScores": [
+      100,
+      99,
+      97,
+      96,
+      93
+    ],
+    "championshipPoints": 90
   },
   {
     "rank": 6,
     "name": "Brandon Hunter",
-    "points": 483
+    "points": 483,
+    "countedScores": [
+      99,
+      99,
+      97,
+      95,
+      93
+    ],
+    "championshipPoints": 93
   },
   {
     "rank": 7,
     "name": "Jeff Tate",
-    "points": 470
+    "points": 476,
+    "countedScores": [
+      99,
+      98,
+      96,
+      92,
+      91
+    ],
+    "championshipPoints": 96
   },
   {
     "rank": 8,
     "name": "Auzzie Dangerous",
-    "points": 469
+    "points": 471,
+    "countedScores": [
+      99,
+      97,
+      93,
+      91,
+      91
+    ],
+    "championshipPoints": 91
   },
   {
-    "rank": 8,
+    "rank": 9,
     "name": "Krazy Kat Ladies",
-    "displayName": "Krazy Kat Ladies Smith",
-    "points": 469
+    "points": 469,
+    "countedScores": [
+      95,
+      94,
+      94,
+      94,
+      92
+    ],
+    "championshipPoints": null,
+    "displayName": "Krazy Kat Ladies Smith"
   },
   {
     "rank": 10,
     "name": "Justin Roberts",
-    "points": 460
+    "points": 463,
+    "countedScores": [
+      99,
+      93,
+      92,
+      91,
+      88
+    ],
+    "championshipPoints": 88
   },
   {
     "rank": 11,
-    "name": "Chris Poor",
-    "points": 454
+    "name": "Robert Shively",
+    "points": 456,
+    "countedScores": [
+      98,
+      90,
+      90,
+      90,
+      88
+    ],
+    "championshipPoints": 98
   },
   {
     "rank": 12,
-    "name": "Troy Geer",
-    "points": 450
+    "name": "Chris Poor",
+    "points": 456,
+    "countedScores": [
+      98,
+      92,
+      90,
+      89,
+      87
+    ],
+    "championshipPoints": 87
   },
   {
     "rank": 13,
-    "name": "Clint Bafford", "championshipEligible": false,
-    "points": 448
-  },
-  {
-    "rank": 14,
     "name": "Jon Myers",
-    "points": 444
+    "points": 455,
+    "countedScores": [
+      97,
+      95,
+      89,
+      88,
+      86
+    ],
+    "championshipPoints": 97
   },
   {
     "rank": 14,
-    "name": "Robert Shively",
-    "points": 444
+    "name": "Troy Geer",
+    "points": 455,
+    "countedScores": [
+      94,
+      93,
+      91,
+      89,
+      88
+    ],
+    "championshipPoints": 89
+  },
+  {
+    "rank": 15,
+    "name": "Clint Bafford",
+    "points": 448,
+    "countedScores": [
+      95,
+      94,
+      93,
+      87,
+      79
+    ],
+    "championshipPoints": null
+  },
+  {
+    "rank": 16,
+    "name": "Cameron Marriott",
+    "points": 436,
+    "countedScores": [
+      94,
+      90,
+      86,
+      84,
+      82
+    ],
+    "championshipPoints": 94
   }
 ];
+const standings = finalAoy.filter(item => item.rank !== 1);
 const FISHING_CHAOS_CLUB_URL = 'https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj';
 const FISHING_CHAOS_SERIES_TOURNAMENTS_URL = `${FISHING_CHAOS_CLUB_URL}/tournament-series/a7NS6zRU4LrTmuYPWIDH/tournaments`;
 const liveBroadcast = {
@@ -88,9 +228,152 @@ const events = [
   {month:'AUG',day:'7–9',name:'48-Hour All-Ohio',detail:'43 anglers · 143 accepted fish · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/yvSiToIoNhEW0DO8TXw4'},
   {month:'AUG',day:'15–16',name:'Indian Lake 24-Hour',detail:'23 anglers · 128 fish entries · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/CibEwf4GgRCAQAQ5V0kz'},
   {month:'SEP',day:'12',name:'Ohio River',detail:'15 anglers · 45 fish entries · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/ziSP9LjG69LXOGJHOA9f'},
-  {month:'OCT',day:'10',name:'Championship',detail:'14-angler championship field · $5,000 added',status:'Qualified field',next:true,url:FISHING_CHAOS_SERIES_TOURNAMENTS_URL,seriesFallback:true}
+  {month:'OCT',day:'10',name:'Championship',detail:'15 registered anglers · 77 fish · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/oVSnYRRpEkZK8bhIxJDU'}
 ];
 const newsArticles = [
+{
+  "slug": "championship-2026",
+  "event": "2026 Championship",
+  "date": "October 10, 2026",
+  "time": "7:00 AM–4:00 PM ET",
+  "anglers": 15,
+  "fish": 77,
+  "title": "Jeffers wins the championship; Leake tops the best-five AOY standings",
+  "dek": "Corey Jeffers wins with 182 inches and $3,987.50. Cameron Marriott takes Big Fish with a 42-inch blue and fills the final Showdown spot.",
+  "facts": [
+    [
+      "15",
+      "Registered anglers"
+    ],
+    [
+      "77",
+      "Fish entries"
+    ],
+    [
+      "182.00″",
+      "Winning total"
+    ],
+    [
+      "$7,250",
+      "Total payout"
+    ]
+  ],
+  "podium": [
+    [
+      "Corey Jeffers",
+      "182.00″ · $3,987.50"
+    ],
+    [
+      "Matt Stewart",
+      "163.25″ · $1,812.50"
+    ],
+    [
+      "Robert Shively",
+      "154.25″ · $725"
+    ]
+  ],
+  "sidebarTitle": "Championship podium",
+  "bigFish": [
+    "Cameron Marriott",
+    "42.00″ blue catfish · $725"
+  ],
+  "highlight": [
+    "Final Showdown qualifier",
+    "Cameron Marriott",
+    "42.00″ blue · First-round bye"
+  ],
+  "factNote": "Results and 15 registered anglers / 77 fish checked in Fishing Chaos on October 11, 2026. Payouts are from Katyakers Outfitters’ final championship update. AOY totals are calculated using the rulebook’s best-five scoring, including the championship; Fishing Chaos series totals are awaiting an update.",
+  "paragraphs": [
+    "Corey Jeffers closed the 2026 championship with 182 inches across his best five catfish. Matt Stewart finished second with 163.25 inches, and Robert Shively took third with 154.25. Fishing Chaos recorded 15 registered anglers, 77 fish, and 14 anglers with a scored total.",
+    "Katyakers Outfitters announced $7,250 in championship payouts: $3,987.50 for Jeffers, $1,812.50 for Stewart, $725 for Shively, and $725 for Big Fish.",
+    "Cameron Marriott won Big Fish with a 42-inch blue. Jacob Leake also posted a 42-inch blue, with Fishing Chaos ranking Marriott first. Marriott receives the Big Fish Showdown first-round bye and faces the winner of Robert Shively versus Corey Jeffers in Match 8.",
+    "AOY counts each angler’s five highest event point scores, including the championship and the two-point event Big Fish bonus. The calculated season totals put Jacob Leake first with 498, Corey Jeffers second with 497, and Matt Stewart third with 495. Jeffers replaces a 97-point finish with 100; Stewart replaces a 96 with 99. Leake’s championship score does not replace any of his top five.",
+    "All eleven trail events are complete, with 259 angler registrations, 1,347 fish submitted, and $51,650 in verified event payouts. These payout totals exclude the separate AOY purse."
+  ],
+  "fullResults": [
+    [
+      1,
+      "Corey Jeffers",
+      "182.00″"
+    ],
+    [
+      2,
+      "Matt Stewart",
+      "163.25″"
+    ],
+    [
+      3,
+      "Robert Shively",
+      "154.25″"
+    ],
+    [
+      4,
+      "Jon Myers",
+      "151.50″"
+    ],
+    [
+      5,
+      "Jeff Tate",
+      "150.75″"
+    ],
+    [
+      6,
+      "Skip Martin",
+      "150.50″"
+    ],
+    [
+      7,
+      "Jacob Leake",
+      "150.25″"
+    ],
+    [
+      8,
+      "Brandon Hunter",
+      "139.25″"
+    ],
+    [
+      9,
+      "Cameron Marriott",
+      "139.00″"
+    ],
+    [
+      10,
+      "Auzzie Dangerous",
+      "127.75″"
+    ],
+    [
+      11,
+      "Blayne Peterman",
+      "105.50″"
+    ],
+    [
+      12,
+      "Troy Geer",
+      "74.00″"
+    ],
+    [
+      13,
+      "Justin Roberts",
+      "63.25″"
+    ],
+    [
+      14,
+      "Chris Poor",
+      "31.50″"
+    ]
+  ],
+  "chaosUrl": "https://app.fishingchaos.com/tournament/oVSnYRRpEkZK8bhIxJDU",
+  "sources": [
+    [
+      "Fishing Chaos championship results",
+      "https://app.fishingchaos.com/tournament/oVSnYRRpEkZK8bhIxJDU"
+    ],
+    [
+      "Katyakers Outfitters final update",
+      "https://www.facebook.com/reel/1624290842723819/"
+    ]
+  ]
+},
 {
   "slug": "ohio-river-2026",
   "event": "Ohio River",
@@ -419,10 +702,10 @@ const newsArticles = [
   }
 ];
 const featuredAnglersBase = [
-  {name:'Jacob Leake',rank:'#1 AOY',initials:'JL',stats:'498 pts · Official series leader'},
-  {name:'Corey Jeffers',rank:'#2 AOY',initials:'CJ',stats:'494 pts · Four points off the lead'},
-  {name:'Matt Stewart',rank:'#3 AOY',initials:'MS',stats:'492 pts · Official series standings'},
-  {name:'Skip Martin',rank:'#4 AOY',initials:'SM',stats:'486 pts · Official series standings'}
+  {name:'Jacob Leake',rank:'#1 AOY',initials:'JL',stats:'498 pts · Best five finishes'},
+  {name:'Corey Jeffers',rank:'#2 AOY',initials:'CJ',stats:'497 pts · Championship winner'},
+  {name:'Matt Stewart',rank:'#3 AOY',initials:'MS',stats:'495 pts · Best five finishes'},
+  {name:'Skip Martin',rank:'#4 AOY',initials:'SM',stats:'487 pts · Best five finishes'}
 ];
 const memberNames = [
   'Chase Kelly','Teddy Ivey','Nick Bays','Wesley Brofford','JOHN COTTERMAN','Jeff Mccafferty',
@@ -481,16 +764,16 @@ const lifetimeStats = Object.fromEntries([
   ["Charles Woods",2,2,1,1,0,400],["Michael Gallaugher",1,0,0,0,0,0],["Scott Hickman",3,1,0,0,0,0],["Justin Scheuerman",1,0,0,0,0,0],["Robert Biehler",1,1,0,0,0,0],["Kyle Harman",2,2,2,2,0,3360],
   ["Matthew Collene",1,0,0,0,0,0],["Austyn Ray",1,0,0,0,0,0],["David Rose",1,0,0,0,0,0],["Kristian Moore",1,0,0,0,0,0],
   ["John Ratliff",2,2,0,0,0,0],["Robert Ratliff",1,0,0,0,0,0],["Steven Mills, Jr",1,0,0,0,0,0],["Jason Berenato",2,0,0,0,0,0],
-  ["Cage Keysor",4,1,0,0,0,0],["Mark Rupe",1,0,0,0,0,0],["Skip Martin",8,8,4,4,0,2056],["Justin Roberts",6,4,1,0,0,430],
+  ["Cage Keysor",4,1,0,0,0,0],["Mark Rupe",1,0,0,0,0,0],["Skip Martin",9,9,4,4,0,2056],["Justin Roberts",7,4,1,0,0,430],
   ["Bryan Mellon",1,1,1,0,0,0],["Brandon Penwell",1,0,0,0,0,0],["Anthony Smith",2,0,0,0,0,0],["John Drummond",4,0,0,0,0,0],
   ["Justin Johnston",3,2,1,0,0,392],["Justin Cantrell",2,1,0,0,0,0],["Clint Bafford",6,3,0,0,0,0],["Nicholas Wilson",3,2,1,1,0,588],
-  ["Andrew Chanthathirath",1,0,0,0,0,0],["Cameron Marriott",6,0,0,0,0,0],["Aubrey Boykin",1,0,0,0,0,0],["Jack Richardson",4,0,0,0,0,0],
+  ["Andrew Chanthathirath",1,0,0,0,0,0],["Cameron Marriott",7,1,0,0,0,725],["Aubrey Boykin",1,0,0,0,0,0],["Jack Richardson",4,0,0,0,0,0],
   ["Kayak Mike",1,1,0,0,0,0],["Gage Smith",1,0,0,0,0,0],["Peter Domin",2,0,0,0,0,0],["Clayton Adkins",3,1,1,0,0,0],
-  ["Amanda Johnson",2,0,0,0,0,0],["Jeff Tate",8,4,2,2,0,1225],["Brier Thompson",1,1,1,0,0,0],["Curtis Cunningham",5,0,0,0,0,0],
-  ["Krazy Kat Ladies",8,5,0,0,0,0],["Robert Shively",8,0,0,0,0,0],["Troy Geer",8,3,0,0,0,440],["Brandon Hunter",8,6,3,2,0,2367],
-  ["Blayne Peterman",9,8,4,2,1,3944],["Dan Phelps",4,1,1,1,0,1470],["Auzzie Dangerous",9,4,2,1,0,1430],["James Capehart",1,0,0,0,0,0],
-  ["William Sobers",1,0,0,0,0,0],["Kevin Miller",1,0,0,0,0,0],["Jacob Leake",9,7,6,4,3,8050],["Chris Poor",9,2,1,1,0,588],
-  ["Corey Jeffers",10,8,6,3,2,5155],["Jon Myers",8,1,0,0,0,350],["Matt Stewart",10,9,6,3,2,5565],["Tom Nunley",2,0,0,0,0,0],
+  ["Amanda Johnson",2,0,0,0,0,0],["Jeff Tate",9,5,3,2,0,1225],["Brier Thompson",1,1,1,0,0,0],["Curtis Cunningham",5,0,0,0,0,0],
+  ["Krazy Kat Ladies",8,5,0,0,0,0],["Robert Shively",9,1,1,1,0,725],["Troy Geer",9,3,0,0,0,440],["Brandon Hunter",9,7,3,2,0,2367],
+  ["Blayne Peterman",10,8,4,2,1,3944],["Dan Phelps",4,1,1,1,0,1470],["Auzzie Dangerous",10,5,2,1,0,1430],["James Capehart",1,0,0,0,0,0],
+  ["William Sobers",1,0,0,0,0,0],["Kevin Miller",1,0,0,0,0,0],["Jacob Leake",10,8,6,4,3,8050],["Chris Poor",10,2,1,1,0,588],
+  ["Corey Jeffers",11,9,7,4,3,9142.5],["Jon Myers",9,2,1,0,0,350],["Matt Stewart",11,10,7,4,2,7377.5],["Tom Nunley",2,0,0,0,0,0],
   ["Nick Bays",1,1,1,1,1,2365],["Matt Groeschel",1,1,1,1,0,1075],["Jeff Mccafferty",1,1,1,0,0,0],["JOHN COTTERMAN",1,0,0,0,0,0],
   ["Teddy Ivey",1,0,0,0,0,0],["Rasin Cain",2,0,0,0,0,0],["Wesley Brofford",1,0,0,0,0,0],["Paul Payne",2,0,0,0,0,0]
 ].map(([name,eventsFished,top10,top5,top3,wins,winnings])=>[name,{eventsFished,top10,top5,top3,wins,winnings}]));
@@ -500,18 +783,18 @@ const verifiedRecords = Object.fromEntries([
   ["Charles Woods",125,"Seneca Lake",36.75,"Blue catfish","Ohio River"],
   ["Amanda Johnson",54.75,"Hoover Reservoir",26.5,"Blue catfish","Hoover Reservoir"],["Andrew Chanthathirath",107.25,"Hoover Reservoir",34.5,"Blue catfish","Hoover Reservoir"],
   ["Anthony Smith",54.5,"Rocky Fork",28,"Channel catfish","Rocky Fork"],["Aubrey Boykin",53.75,"Hoover Reservoir",28.75,"Blue catfish","Hoover Reservoir"],
-  ["Austyn Ray",85.5,"Sandusky Bay — June 20",32.25,"Channel catfish","Sandusky Bay — June 20"],["Auzzie Dangerous",151.75,"Sandusky Bay — June 20",37.5,"Blue catfish","Caesar Creek"],
-  ["Blayne Peterman",187.5,"Hoover Reservoir",40,"Blue catfish","Hoover Reservoir"],["Brandon Hunter",166,"Sandusky Bay — May 24",34.5,"Channel catfish","Sandusky Bay — May 24"],
+  ["Austyn Ray",85.5,"Sandusky Bay — June 20",32.25,"Channel catfish","Sandusky Bay — June 20"],["Auzzie Dangerous",151.75,"Sandusky Bay — June 20",40.5,"Blue catfish","2026 Championship"],
+  ["Blayne Peterman",187.5,"Hoover Reservoir",40,"Blue catfish","Hoover Reservoir"],["Brandon Hunter",166,"Sandusky Bay — May 24",37,"Blue catfish","2026 Championship"],
   ["Brandon Penwell",51.5,"Rocky Fork",28,"Channel catfish","Rocky Fork"],["Brier Thompson",173.5,"Hoover Reservoir",41.5,"Blue catfish","Hoover Reservoir"],
   ["Bryan Mellon",138.5,"Caesar Creek",33,"Blue catfish","Caesar Creek"],["Cage Keysor",79.5,"Deer Creek",32,"Blue catfish","Ohio River"],
-  ["Cameron Marriott",146.5,"Sandusky Bay — May 24",34,"Blue catfish","Caesar Creek"],["Chris Poor",149.75,"Rocky Fork",32.25,"Channel catfish","Rocky Fork"],
+  ["Cameron Marriott",146.5,"Sandusky Bay — May 24",42,"Blue catfish","2026 Championship"],["Chris Poor",149.75,"Rocky Fork",32.25,"Channel catfish","Rocky Fork"],
   ["Clayton Adkins",153.25,"Sandusky Bay — May 24",38,"Blue catfish","Hoover Reservoir"],["Clint Bafford",154,"Hoover Reservoir",39,"Blue catfish","Hoover Reservoir"],
-  ["Corey Jeffers",179,"Hoover Reservoir",41,"Blue catfish","48-Hour All-Ohio"],["Curtis Cunningham",132,"Sandusky Bay — June 20",30,"Channel catfish","Sandusky Bay — June 20"],
+  ["Corey Jeffers",182,"2026 Championship",41,"Blue catfish","48-Hour All-Ohio"],["Curtis Cunningham",132,"Sandusky Bay — June 20",30,"Channel catfish","Sandusky Bay — June 20"],
   ["Dan Phelps",151,"Rocky Fork",33.5,"Channel catfish","Rocky Fork"],["David Rose",142.75,"Sandusky Bay — June 20",30.25,"Channel catfish","Sandusky Bay — June 20"],
   ["Gage Smith",25.75,"Hoover Reservoir",25.75,"Blue catfish","Hoover Reservoir"],["Jack Richardson",32.25,"Sandusky Bay — May 24",32.25,"Channel catfish","Sandusky Bay — May 24"],
   ["Jacob Leake",182.5,"Hoover Reservoir",42.5,"Blue catfish","48-Hour All-Ohio"],["Jason Berenato",130.75,"Sandusky Bay — June 20",31.5,"Channel catfish","Sandusky Bay — May 24"],
   ["Jeff Tate",163.25,"Ohio River",40.5,"Blue catfish","Hoover Reservoir"],["John Drummond",146.75,"Sandusky Bay — May 24",30.5,"Channel catfish","Sandusky Bay — May 24"],
-  ["John Ratliff",154,"Sandusky Bay — May 24",34.75,"Flathead catfish","48-Hour All-Ohio"],["Jon Myers",146.5,"Sandusky Bay — May 24",44.25,"Blue catfish","Ohio River"],
+  ["John Ratliff",154,"Sandusky Bay — May 24",34.75,"Flathead catfish","48-Hour All-Ohio"],["Jon Myers",151.5,"2026 Championship",44.25,"Blue catfish","Ohio River"],
   ["Justin Cantrell",157,"Hoover Reservoir",39,"Blue catfish","Hoover Reservoir"],["Justin Johnston",157.25,"Sandusky Bay — June 20",33.5,"Channel catfish","Sandusky Bay — June 20"],
   ["Justin Roberts",157,"Sandusky Bay — May 24",40,"Flathead catfish","Indian Lake 24-Hour"],["Kayak Mike",155.5,"Sandusky Bay — June 20",32.25,"Channel catfish","Sandusky Bay — June 20"],
   ["Kevin Miller",28,"Rocky Fork",28,"Channel catfish","Rocky Fork"],["Krazy Kat Ladies",159.25,"Sandusky Bay — May 24",34,"Channel catfish","Sandusky Bay — May 24"],
@@ -519,7 +802,7 @@ const verifiedRecords = Object.fromEntries([
   ["Matt Stewart",174.5,"Caesar Creek",46,"Blue catfish","Hoover Reservoir"],["Matthew Collene",78.75,"Sandusky Bay — June 20",28.75,"Channel catfish","Sandusky Bay — June 20"],
   ["Michael Gallaugher",110,"Deer Creek",24,"Channel catfish","Deer Creek"],["Nicholas Wilson",165,"Sandusky Bay — May 24",34,"Channel catfish","Sandusky Bay — May 24"],
   ["Robert Biehler",154.5,"Sandusky Bay — June 20",32,"Channel catfish","Sandusky Bay — June 20"],["Robert Ratliff",149.75,"Sandusky Bay — May 24",33.25,"Channel catfish","Sandusky Bay — May 24"],
-  ["Robert Shively",153.75,"Sandusky Bay — May 24",38.5,"Blue catfish","Hoover Reservoir"],["Skip Martin",166,"Sandusky Bay — May 24",41,"Flathead catfish","48-Hour All-Ohio"],
+  ["Robert Shively",154.25,"2026 Championship",38.5,"Blue catfish","Hoover Reservoir"],["Skip Martin",166,"Sandusky Bay — May 24",41,"Flathead catfish","48-Hour All-Ohio"],
   ["Troy Geer",155,"Sandusky Bay — May 24",35.25,"Channel catfish","Sandusky Bay — May 24"],["William Sobers",20.75,"Rocky Fork",20.75,"Channel catfish","Rocky Fork"],
   ["Nick Bays",108.25,"Indian Lake 24-Hour",39.5,"Flathead catfish","Indian Lake 24-Hour"],["Matt Groeschel",102,"Indian Lake 24-Hour",38.25,"Flathead catfish","Indian Lake 24-Hour"],
   ["Jeff Mccafferty",89,"Indian Lake 24-Hour",32.25,"Flathead catfish","Indian Lake 24-Hour"],["JOHN COTTERMAN",78.5,"Indian Lake 24-Hour",29.75,"Channel catfish","Indian Lake 24-Hour"],
@@ -609,11 +892,11 @@ const $ = selector => document.querySelector(selector);
 const money = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value);
 
 function renderStandings(){
-  const championshipField = standings.filter(item => item.rank <= 15 && item.championshipEligible !== false);
+  const championshipField = standings;
   $('#standingsTable').innerHTML = championshipField.map(item => {
     const publicName = item.displayName || memberDisplayName(item.name);
-    const cutLine = item.rank === 15 ? '<span class="cut-line">Championship cut line</span>' : '';
-    return `<div class="standing-row ${item.rank===15?'cut-line-row':''}"><span class="pos">${String(item.rank).padStart(2,'0')}</span><div class="standing-person"><img class="standing-thumb" src="/${rosterPhoto(item.name)}" alt="${escapeHtml(publicName)}" loading="lazy"><div><h3>${escapeHtml(publicName)}</h3><p>Official series rank #${item.rank}</p>${cutLine}</div></div><strong class="points">${item.points} <small>PTS</small></strong></div>`;
+    const cutLine = '';
+    return `<div class="standing-row "><span class="pos">${String(item.rank).padStart(2,'0')}</span><div class="standing-person"><img class="standing-thumb" src="/${rosterPhoto(item.name)}" alt="${escapeHtml(publicName)}" loading="lazy"><div><h3>${escapeHtml(publicName)}</h3><p>Best five: ${item.countedScores.join(' + ')}</p>${cutLine}</div></div><strong class="points">${item.points} <small>PTS</small></strong></div>`;
   }).join('');
 }
 function renderEvents(){
@@ -688,7 +971,7 @@ function renderAnglerProfilePage(){
   const bestScore=record.bestScore==null?'<strong>No score yet</strong><small>No Fishing Chaos submission recorded</small>':`<strong>${record.bestScore.toFixed(2)} in.</strong><small>${escapeHtml(record.bestScoreEvent)}</small>`;
   const biggestFish=record.biggestFish==null?'<strong>No fish yet</strong><small>No Fishing Chaos submission recorded</small>':`<strong>${record.biggestFish.toFixed(2)} in.</strong><small>${escapeHtml(record.biggestFishSpecies)} · ${escapeHtml(record.biggestFishEvent)}</small>`;
   document.title=`${displayName} | Katyakers of Ohio`;
-  $('#anglerProfileContent').innerHTML=`<div class="profile-hero"><div class="profile-portrait">${image}</div><div class="profile-hero-copy"><span class="eyebrow">${publicProfiles[angler.name]?'CLAIMED ANGLER PROFILE':'OFFICIAL KATYAKERS MEMBER'}</span><h1 id="anglerProfileName">${escapeHtml(displayName)}</h1>${displayName!==angler.name?`<p class="profile-roster-name">${escapeHtml(angler.name)}</p>`:''}<div class="profile-chips"><span>${escapeHtml(method)}</span>${profile.hometown?`<span>${escapeHtml(profile.hometown)}</span>`:''}</div><p>${escapeHtml(profile.bio||'Official Katyakers of Ohio roster member. Personal angler details can be added after this profile is claimed.')}</p><button class="button primary" type="button" data-claim-member="${escapeHtml(angler.name)}">${publicProfiles[angler.name]?'Manage my profile':'Claim this profile'}</button></div></div><div class="profile-content-grid"><section class="profile-panel"><div class="profile-panel-heading"><span class="eyebrow dark">ANGLER DETAILS</span><h2>On the water</h2></div><div class="profile-facts">${fact('Fishing method',method)}${fact('Hometown',profile.hometown)}${fact('Favorite body of water',profile.favorite_water)}${fact('Total years professionally fishing',profile.years_fishing==null?'':String(profile.years_fishing))}${fact('Personal best blue cat',profile.personal_best_blue||profile.personal_best)}${fact('Personal best flathead',profile.personal_best_flathead)}${fact('Personal best channel cat',profile.personal_best_channel)}</div></section><section class="profile-panel lifetime-panel"><div class="profile-panel-heading"><span class="eyebrow dark">VERIFIED COMPETITION RECORD</span><h2>Lifetime totals</h2><p>Automatically tracked from completed Katyakers events in Fishing Chaos.</p></div><div class="verified-highlights"><div><span>Best Katyakers event score</span>${bestScore}</div><div><span>Biggest submitted fish</span>${biggestFish}</div></div><div class="profile-stats">${stat('Events fished',stats.eventsFished)}${stat('Top 10 finishes',stats.top10)}${stat('Top 5 finishes',stats.top5)}${stat('Top 3 finishes',stats.top3)}${stat('Wins',stats.wins)}${stat('Lifetime winnings',money(stats.winnings),'money-stat')}</div><p class="profile-stats-note">Finishes, records, and published placement and Big Fish payouts are verified through Ohio River.</p></section></div><div class="profile-social"><span>Follow ${escapeHtml(displayName)}</span>${socials.length?socials.map(([label,url])=>`<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${label} ↗</a>`).join(''):'<em class="profile-social-empty">No social links added yet.</em>'}</div>`;
+  $('#anglerProfileContent').innerHTML=`<div class="profile-hero"><div class="profile-portrait">${image}</div><div class="profile-hero-copy"><span class="eyebrow">${publicProfiles[angler.name]?'CLAIMED ANGLER PROFILE':'OFFICIAL KATYAKERS MEMBER'}</span><h1 id="anglerProfileName">${escapeHtml(displayName)}</h1>${displayName!==angler.name?`<p class="profile-roster-name">${escapeHtml(angler.name)}</p>`:''}<div class="profile-chips"><span>${escapeHtml(method)}</span>${profile.hometown?`<span>${escapeHtml(profile.hometown)}</span>`:''}</div><p>${escapeHtml(profile.bio||'Official Katyakers of Ohio roster member. Personal angler details can be added after this profile is claimed.')}</p><button class="button primary" type="button" data-claim-member="${escapeHtml(angler.name)}">${publicProfiles[angler.name]?'Manage my profile':'Claim this profile'}</button></div></div><div class="profile-content-grid"><section class="profile-panel"><div class="profile-panel-heading"><span class="eyebrow dark">ANGLER DETAILS</span><h2>On the water</h2></div><div class="profile-facts">${fact('Fishing method',method)}${fact('Hometown',profile.hometown)}${fact('Favorite body of water',profile.favorite_water)}${fact('Total years professionally fishing',profile.years_fishing==null?'':String(profile.years_fishing))}${fact('Personal best blue cat',profile.personal_best_blue||profile.personal_best)}${fact('Personal best flathead',profile.personal_best_flathead)}${fact('Personal best channel cat',profile.personal_best_channel)}</div></section><section class="profile-panel lifetime-panel"><div class="profile-panel-heading"><span class="eyebrow dark">VERIFIED COMPETITION RECORD</span><h2>Lifetime totals</h2><p>Automatically tracked from completed Katyakers events in Fishing Chaos.</p></div><div class="verified-highlights"><div><span>Best Katyakers event score</span>${bestScore}</div><div><span>Biggest submitted fish</span>${biggestFish}</div></div><div class="profile-stats">${stat('Events fished',stats.eventsFished)}${stat('Top 10 finishes',stats.top10)}${stat('Top 5 finishes',stats.top5)}${stat('Top 3 finishes',stats.top3)}${stat('Wins',stats.wins)}${stat('Lifetime winnings',money(stats.winnings),'money-stat')}</div><p class="profile-stats-note">Finishes, records, and published placement and Big Fish payouts are verified through the 2026 Championship.</p></section></div><div class="profile-social"><span>Follow ${escapeHtml(displayName)}</span>${socials.length?socials.map(([label,url])=>`<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${label} ↗</a>`).join(''):'<em class="profile-social-empty">No social links added yet.</em>'}</div>`;
 }
 async function fetchJson(url,options){const response=await fetch(url,options);const data=await response.json().catch(()=>({error:'Something went wrong'}));if(!response.ok)throw new Error(data.error||'Something went wrong');return data}
 async function loadPublicProfiles(){try{const data=await fetchJson('/api/profiles');publicProfiles=Object.fromEntries(data.profiles.map(profile=>[profile.member_name,profile]));renderAnglers();renderAnglerProfilePage()}catch(error){console.warn('Profiles unavailable',error)}}
@@ -733,7 +1016,7 @@ function renderCart(){
 }
 function toast(message){const element=$('#toast');element.textContent=message;element.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>element.classList.remove('show'),1800)}
 function updateCountdown(){
-  $('#countdown').innerHTML='<div><strong>14</strong><span>Championship anglers</span></div>';
+  $('#countdown').innerHTML='<div><strong>11</strong><span>Showdown qualifiers</span></div>';
 }
 function setMenu(open){const nav=$('#mainNav'),button=$('#menuToggle');nav.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close navigation':'Open navigation')}
 function openCart(){lastFocused=document.activeElement;$('#cartDrawer').classList.add('open');$('#cartDrawer').setAttribute('aria-hidden','false');$('#drawerBackdrop').hidden=false;requestAnimationFrame(()=>$('#drawerBackdrop').classList.add('open'));$('#cartButton').setAttribute('aria-expanded','true');document.body.classList.add('drawer-open');$('#closeCart').focus()}
