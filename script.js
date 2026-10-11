@@ -360,6 +360,11 @@ const newsArticles = [
       14,
       "Chris Poor",
       "31.50″"
+    ],
+    [
+      "—",
+      "Krazy Kat Ladies Smith",
+      "No scorable total"
     ]
   ],
   "chaosUrl": "https://app.fishingchaos.com/tournament/oVSnYRRpEkZK8bhIxJDU",
