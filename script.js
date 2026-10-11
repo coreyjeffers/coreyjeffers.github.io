@@ -770,7 +770,7 @@ const lifetimeStats = Object.fromEntries([
   ["Andrew Chanthathirath",1,0,0,0,0,0],["Cameron Marriott",7,1,0,0,0,725],["Aubrey Boykin",1,0,0,0,0,0],["Jack Richardson",4,0,0,0,0,0],
   ["Kayak Mike",1,1,0,0,0,0],["Gage Smith",1,0,0,0,0,0],["Peter Domin",2,0,0,0,0,0],["Clayton Adkins",3,1,1,0,0,0],
   ["Amanda Johnson",2,0,0,0,0,0],["Jeff Tate",9,5,3,2,0,1225],["Brier Thompson",1,1,1,0,0,0],["Curtis Cunningham",5,0,0,0,0,0],
-  ["Krazy Kat Ladies",8,5,0,0,0,0],["Robert Shively",9,1,1,1,0,725],["Troy Geer",9,3,0,0,0,440],["Brandon Hunter",9,7,3,2,0,2367],
+  ["Krazy Kat Ladies",9,5,0,0,0,0],["Robert Shively",9,1,1,1,0,725],["Troy Geer",9,3,0,0,0,440],["Brandon Hunter",9,7,3,2,0,2367],
   ["Blayne Peterman",10,8,4,2,1,3944],["Dan Phelps",4,1,1,1,0,1470],["Auzzie Dangerous",10,5,2,1,0,1430],["James Capehart",1,0,0,0,0,0],
   ["William Sobers",1,0,0,0,0,0],["Kevin Miller",1,0,0,0,0,0],["Jacob Leake",10,8,6,4,3,8050],["Chris Poor",10,2,1,1,0,588],
   ["Corey Jeffers",11,9,7,4,3,9142.5],["Jon Myers",9,2,1,0,0,350],["Matt Stewart",11,10,7,4,2,7377.5],["Tom Nunley",2,0,0,0,0,0],
