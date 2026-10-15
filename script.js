@@ -286,7 +286,7 @@ const newsArticles = [
   "paragraphs": [
     "Corey Jeffers closed the 2026 championship with 182 inches across his best five catfish. Matt Stewart finished second with 163.25 inches, and Robert Shively took third with 154.25. Fishing Chaos recorded 15 registered anglers, 77 fish, and 14 anglers with a scored total.",
     "Katyakers Outfitters announced $7,250 in championship payouts: $3,987.50 for Jeffers, $1,812.50 for Stewart, $725 for Shively, and $725 for Big Fish.",
-    "Cameron Marriott won Big Fish with a 42-inch blue. Jacob Leake also posted a 42-inch blue, with Fishing Chaos ranking Marriott first. Marriott receives the Big Fish Showdown first-round bye and faces the winner of Robert Shively versus Corey Jeffers in Match 8.",
+    "Cameron Marriott won Big Fish with a 42-inch blue. Jacob Leake also posted a 42-inch blue, with Fishing Chaos ranking Marriott first. Marriott receives the Big Fish Showdown first-round bye and faces the winner of Robert Shively versus Corey Jeffers in Match 4 of the revised six-angler bracket.",
     "AOY counts each angler’s five highest event point scores, including the championship and the two-point event Big Fish bonus. The calculated season totals put Jacob Leake first with 498, Corey Jeffers second with 497, and Matt Stewart third with 495. Jeffers replaces a 97-point finish with 100; Stewart replaces a 96 with 99. Leake’s championship score does not replace any of his top five.",
     "All eleven trail events are complete, with 259 angler registrations, 1,347 fish submitted, and $59,150 in verified payouts: $51,650 in event placement and Big Fish awards plus the $7,500 AOY purse. AOY awards add $4,500 to Jacob Leake, $2,250 to Corey Jeffers, and $750 to Matt Stewart. These awards are included in their personal lifetime winnings."
   ],
@@ -1022,7 +1022,7 @@ function renderCart(){
 }
 function toast(message){const element=$('#toast');element.textContent=message;element.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>element.classList.remove('show'),1800)}
 function updateCountdown(){
-  $('#countdown').innerHTML='<div><strong>11</strong><span>Showdown qualifiers</span></div>';
+  $('#countdown').innerHTML='<div><strong>6</strong><span>Showdown anglers</span></div>';
 }
 function setMenu(open){const nav=$('#mainNav'),button=$('#menuToggle');nav.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close navigation':'Open navigation')}
 function openCart(){lastFocused=document.activeElement;$('#cartDrawer').classList.add('open');$('#cartDrawer').setAttribute('aria-hidden','false');$('#drawerBackdrop').hidden=false;requestAnimationFrame(()=>$('#drawerBackdrop').classList.add('open'));$('#cartButton').setAttribute('aria-expanded','true');document.body.classList.add('drawer-open');$('#closeCart').focus()}
