@@ -1,0 +1,6 @@
+const DB_NAME='katyakers-tournament-v1';
+let opened;
+function open(){return opened??=new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>{r.result.createObjectStore('fish',{keyPath:'clientId'});r.result.createObjectStore('meta');};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+async function transaction(store,mode,operation){const db=await open();return new Promise((resolve,reject)=>{const tx=db.transaction(store,mode);const request=operation(tx.objectStore(store));let result;request.onsuccess=()=>{result=request.result;};tx.oncomplete=()=>resolve(result);tx.onabort=tx.onerror=()=>reject(tx.error||new Error('Device storage could not save this record.'));});}
+export const local={all:()=>transaction('fish','readonly',s=>s.getAll()),put:row=>transaction('fish','readwrite',s=>s.put(row)),get:id=>transaction('fish','readonly',s=>s.get(id)),remove:id=>transaction('fish','readwrite',s=>s.delete(id)),set:(key,value)=>transaction('meta','readwrite',s=>s.put(value,key)),read:key=>transaction('meta','readonly',s=>s.get(key))};
+export async function verifyStorage(){const token=crypto.randomUUID();await local.set('storage-test',token);if(await local.read('storage-test')!==token)throw new Error('Device storage verification failed.');return navigator.storage?.estimate?await navigator.storage.estimate():{};}
