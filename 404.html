@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=58">
+  <link rel="stylesheet" href="/styles.css?v=87">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -33,7 +33,7 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-      <a href="#schedule">Schedule</a><a href="#standings">Standings</a><a href="#anglers">Anglers</a><a href="#challenge">1v1</a><a href="#showdown">Showdown</a><a href="#news">News</a><a href="#shop">Shop</a><a href="#shirt-club">Shirt Club</a><a href="https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj" target="_blank" rel="noopener">Fishing Chaos ↗</a>
+      <a href="#schedule">Schedule</a><a href="#standings">Standings</a><a href="#anglers">Anglers</a><a href="#frostbite">Frostbite</a><a href="#showdown">Showdown</a><a href="#news">News</a><a href="#shop">Shop</a><a href="#shirt-club">Shirt Club</a><a href="https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj" target="_blank" rel="noopener">Fishing Chaos ↗</a>
     </nav>
     <button class="cart-button" id="cartButton" type="button" aria-label="Open merchandise cart, 0 items" aria-expanded="false" aria-controls="cartDrawer">
       <span class="cart-label">Cart</span><span id="cartCount" aria-hidden="true">0</span>
@@ -104,42 +104,22 @@
       <div class="event-grid" id="eventGrid"></div>
     </section>
 
-    <section class="dark-section" id="challenge" aria-labelledby="challengeTitle">
+    <section class="dark-section frostbite-section" id="frostbite" aria-labelledby="frostbiteTitle">
       <div class="challenge-copy">
-        <span class="eyebrow">THE FINALISTS ARE SET</span><h2 id="challengeTitle">The 1v1<br>Challenge</h2>
-        <p>Fan voting is complete. Jacob Leake and Cage Keysor will face off head to head for the trophy and $100.</p>
-        <ol class="challenge-steps"><li><b>1</b><span>Fan voting complete</span></li><li><b>2</b><span>The finalists fish off</span></li><li><b>3</b><span>One champion remains</span></li></ol>
-        <a class="button primary" href="https://www.facebook.com/share/p/1DPZ7jYd1k/" target="_blank" rel="noopener">View final voting post ↗</a>
+        <span class="eyebrow">FOUR WINTER EVENTS · ONE SEASON TITLE</span>
+        <h2 id="frostbiteTitle">The Frostbite<br>Series</h2>
+        <p>The fishing doesn’t stop when the temperature drops. Katyakers’ Frostbite Series brings four winter events and a dedicated Angler of the Year race.</p>
+        <ol class="challenge-steps"><li><b>1</b><span>Compete across four winter events</span></li><li><b>2</b><span>All four event scores count toward AOY</span></li><li><b>3</b><span>The highest combined score wins $400</span></li></ol>
+        <a class="button primary" href="https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj" target="_blank" rel="noopener">Explore events on Fishing Chaos ↗</a>
       </div>
-      <div class="finalists-panel" id="vote" aria-labelledby="finalistsTitle">
-        <div class="finalists-heading"><span>Official 1v1 matchup</span><h3 id="finalistsTitle">Meet the finalists</h3></div>
-        <div class="finalists-grid">
-          <a class="finalist-card" href="/anglers/jacob-leake" aria-label="View Jacob Leake's angler profile">
-            <img src="/assets/members/7d1663fa65b260ae.jpg?v=3" alt="Jacob Leake" loading="lazy" decoding="async">
-            <span>Finalist</span><strong>Jacob Leake</strong><small>View angler profile →</small>
-          </a>
-          <div class="finalists-vs" aria-hidden="true">VS</div>
-          <a class="finalist-card" href="/anglers/cage-keysor" aria-label="View Cage Keysor's angler profile">
-            <img src="/assets/members/2d0ab81823e80cdd.jpg?v=3" alt="Cage Keysor" loading="lazy" decoding="async">
-            <span>Finalist</span><strong>Cage Keysor</strong><small>View angler profile →</small>
-          </a>
-        </div>
-        <p class="finalists-note">Voting closed July 23 at 7:00 PM ET. The complete public voter-name list has been removed.</p>
+      <div class="frostbite-prize" aria-label="Frostbite Angler of the Year prize">
+        <span class="eyebrow">FROSTBITE ANGLER OF THE YEAR</span>
+        <strong class="frostbite-amount">$400</strong>
+        <h3>Four events.<br>Every score counts.</h3>
+        <p>The AOY winner is the angler with the highest combined score from the four winter events. Best four of four means no dropped event scores.</p>
+        <div class="frostbite-counts"><div><strong>4</strong><span>Winter events</span></div><div><strong>4</strong><span>Scores counted</span></div><div><strong>1</strong><span>AOY winner</span></div></div>
+        <a href="https://www.facebook.com/KATYAKERSOUTFITTERS" target="_blank" rel="noopener">Follow official Frostbite updates ↗</a>
       </div>
-      <section class="live-broadcast" aria-labelledby="liveBroadcastTitle">
-        <div class="live-broadcast-head">
-          <div><span class="live-status"><i aria-hidden="true"></i> Live event broadcast</span><h3 id="liveBroadcastTitle">Watch the 1v1 live</h3></div>
-          <p>Official Katyakers coverage powered through StreamYard.</p>
-        </div>
-        <div class="live-player" id="livePlayer">
-          <iframe id="liveBroadcastFrame" title="Katyakers 1v1 live broadcast" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
-          <div class="live-placeholder" id="livePlaceholder">
-            <span class="broadcast-mark" aria-hidden="true">LIVE</span>
-            <div><strong>Broadcast player coming soon</strong><p>The live video will appear here when the official StreamYard broadcast is scheduled.</p></div>
-          </div>
-        </div>
-        <div class="live-broadcast-foot"><span id="liveBroadcastNote">Waiting for the official viewer link</span><a class="button primary compact" id="liveBroadcastLink" href="#" target="_blank" rel="noopener" hidden>Open broadcast ↗</a></div>
-      </section>
     </section>
 
     <section class="showdown" id="showdown" aria-labelledby="showdownTitle">
@@ -249,7 +229,7 @@
 
   <footer>
     <div class="footer-brand"><strong>KATYAKERS</strong><span>OF OHIO TOURNAMENT TRAIL</span><p>Big fish. Big payouts. Built for anglers.</p></div>
-    <div><h3>Compete</h3><a href="#schedule">Schedule</a><a href="#standings">AOY standings</a><a href="#challenge">1v1 challenge</a></div>
+    <div><h3>Compete</h3><a href="#schedule">Schedule</a><a href="#standings">AOY standings</a><a href="#frostbite">Frostbite Series</a></div>
     <div><h3>Explore</h3><a href="#anglers">Anglers</a><a href="#news">News</a><a href="#shop">Store</a><a href="#shirt-club">Shirt Club</a></div>
     <div><h3>Connect</h3><a href="https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj" target="_blank" rel="noopener">Fishing Chaos ↗</a><a href="mailto:corey@katyakers.com">Contact the trail</a><a href="mailto:corey@katyakers.com?subject=Katyakers%20sponsorship">Sponsorship</a></div>
     <p class="copyright">© 2026 Katyakers of Ohio. All rights reserved.</p>
@@ -282,6 +262,6 @@
   </aside>
   <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/script.js?v=86"></script>
+  <script src="/script.js?v=87"></script>
 </body>
 </html>

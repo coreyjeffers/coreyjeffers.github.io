@@ -213,10 +213,6 @@ const finalAoy = [
 const standings = finalAoy.filter(item => item.rank !== 1);
 const FISHING_CHAOS_CLUB_URL = 'https://app.fishingchaos.com/club/Ehg8nJithN8CCAMoLKHj';
 const FISHING_CHAOS_SERIES_TOURNAMENTS_URL = `${FISHING_CHAOS_CLUB_URL}/tournament-series/a7NS6zRU4LrTmuYPWIDH/tournaments`;
-const liveBroadcast = {
-  embedUrl:'https://www.youtube.com/embed/sfiD_k-eUpo?autoplay=1&mute=1&playsinline=1&rel=0',
-  watchUrl:'https://www.youtube.com/watch?v=sfiD_k-eUpo'
-};
 const events = [
   {month:'APR',day:'11',name:'Rocky Fork',detail:'29 anglers · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/sjOzaQrBhQHvTn0O8ETj'},
   {month:'APR',day:'25',name:'Hoover Reservoir',detail:'23 anglers · Complete',status:'Complete',done:true,url:'https://app.fishingchaos.com/tournament/3kcgxAsCv7mJV6uxMcJu'},
@@ -992,11 +988,6 @@ async function openProfileModal(){
 }
 function closeProfileModal(){if(!$('#profileModal').classList.contains('open'))return;$('#profileModal').classList.remove('open');$('#profileModal').setAttribute('aria-hidden','true');$('#profileBackdrop').classList.remove('open');document.body.classList.remove('drawer-open');setTimeout(()=>{$('#profileBackdrop').hidden=true},250);if(lastFocused)lastFocused.focus()}
 async function saveProfile(event){event.preventDefault();const form=new FormData(event.currentTarget);const payload=Object.fromEntries(form.entries());const button=$('#saveProfile');button.disabled=true;button.textContent='Saving…';try{const data=await fetchJson('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});currentAccount.profile=data.profile;await loadPublicProfiles();fillProfileForm(data.profile);$('#profileTitle').textContent='Edit your member profile';toast('Profile saved')}catch(error){toast(error.message)}finally{button.disabled=false;button.textContent='Save profile'}}
-function renderLiveBroadcast(){
-  const frame=$('#liveBroadcastFrame'),placeholder=$('#livePlaceholder'),link=$('#liveBroadcastLink'),note=$('#liveBroadcastNote');
-  if(liveBroadcast.embedUrl){frame.src=liveBroadcast.embedUrl;frame.hidden=false;placeholder.hidden=true;note.textContent='The official broadcast is ready';}
-  if(liveBroadcast.watchUrl){link.href=liveBroadcast.watchUrl;link.hidden=false;}
-}
 function renderProducts(filter='all'){
   const visible = products.filter(product => filter==='all' || product.category===filter);
   $('#productGrid').innerHTML = visible.map(product => `<article class="product-card${product.comingSoon?' is-coming-soon':''}"><div class="product-image">${product.badge?`<span class="product-badge">${product.badge}</span>`:''}${product.image?`<img src="/${product.image}" alt="${escapeHtml(product.name)} artwork" loading="lazy" decoding="async">`:`<div class="product-art">${product.art}<small>${product.sub}</small></div>`}</div><div class="product-info"><h3>${product.name}</h3>${product.description?`<p>${escapeHtml(product.description)}</p>`:''}${product.sizes?`<label class="product-size">Size <span>Required</span><select data-size-for="${product.id}" aria-label="Choose a required size for ${escapeHtml(product.name)}" required><option value="" selected disabled>Select size</option>${product.sizes.map(size=>`<option value="${size}">${size}${product.sizeAdjustments?.[size]?` (+${money(product.sizeAdjustments[size])})`:''}</option>`).join('')}</select></label>`:''}<div class="product-meta"><strong data-price-for="${product.id}">${money(product.price)}</strong>${product.comingSoon?'<span class="coming-soon-label">Launching soon</span>':`<button class="quick-add" type="button" data-id="${product.id}" aria-label="Buy ${product.name} securely">Buy now</button>`}</div></div></article>`).join('');
@@ -1075,4 +1066,4 @@ $('#closeCart').addEventListener('click',closeCart);
 $('#drawerBackdrop').addEventListener('click',closeCart);
 $('#checkoutButton').addEventListener('click',requestOrder);
 
-renderStandings();renderEvents();renderAnglers();renderNews();renderAnglerProfilePage();renderNewsArticlePage();renderLiveBroadcast();renderProducts();renderCart();updateCountdown();loadPublicProfiles();if(location.hash==='#claim-profile')openProfileModal();setInterval(updateCountdown,60000);
+renderStandings();renderEvents();renderAnglers();renderNews();renderAnglerProfilePage();renderNewsArticlePage();renderProducts();renderCart();updateCountdown();loadPublicProfiles();if(location.hash==='#claim-profile')openProfileModal();setInterval(updateCountdown,60000);
