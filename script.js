@@ -1013,7 +1013,7 @@ function renderCart(){
 }
 function toast(message){const element=$('#toast');element.textContent=message;element.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>element.classList.remove('show'),1800)}
 function updateCountdown(){
-  $('#countdown').innerHTML='<div><strong>6</strong><span>Showdown anglers</span></div>';
+  $('#countdown').innerHTML='<div><strong>73.75″</strong><span>Winning total</span></div>';
 }
 function setMenu(open){const nav=$('#mainNav'),button=$('#menuToggle');nav.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close navigation':'Open navigation')}
 function openCart(){lastFocused=document.activeElement;$('#cartDrawer').classList.add('open');$('#cartDrawer').setAttribute('aria-hidden','false');$('#drawerBackdrop').hidden=false;requestAnimationFrame(()=>$('#drawerBackdrop').classList.add('open'));$('#cartButton').setAttribute('aria-expanded','true');document.body.classList.add('drawer-open');$('#closeCart').focus()}
